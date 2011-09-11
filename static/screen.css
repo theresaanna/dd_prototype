@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  background: url(bg-body.gif) repeat left top;
+}
+
+.content {
+  background-color: #fff;
+  width: 990px;
+  margin: 0 auto;
+}
+
+.inner {
+  background-color: #f8f7f3;
+  margin-top: -4px;
+}
+
+.good-stuff {
+  background-color: #fff;
+  border: 1px solid #c2c2c2;
+  border-left: none;
+  -webkit-border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0;
+  float: left;
+  padding: 5px 9px;
+  margin-top: -4px;
+}
+
+.main {
+  vertical-align: top;
+}
