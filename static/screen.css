@@ -30,3 +30,7 @@ body {
 .main {
   vertical-align: top;
 }
+
+.destroy {
+  cursor: pointer;
+}

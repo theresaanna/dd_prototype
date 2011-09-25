@@ -4,14 +4,28 @@
     
     <link rel="stylesheet" href="static/screen.css"/>
     
-    <script src="js/underscore.js"></script>
-    <script src="js/backbone.js"></script>
-    <script src="js/mustache.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="js/spine.js"></script>
+    <script src="js/lib/spine.tmpl.js"></script>
+    <script src="js/models/stroller.js"></script>
+    <script src="js/controllers/strollers.js"></script>
+    <script src="js/controllers/menu.js"></script>
   </head>
   
   <body>
     <div class="content">
       <img src="static/header.png"/>
+      <div id="menu">
+        <div id="list">
+          <div id="counter"></div>
+        
+          <script type="text/template" id="stroller-list" charset="utf-8">
+            <div class="delete">${name}</div>
+          </script>
+        </div>
+        
+      </div>
       <div class="inner">
         <img src="static/content-header.png"/>
         <div class="good-stuff">
@@ -21,5 +35,6 @@
       </div>
       <img src="static/footer.png"/>
     </div>
+    <script src="js/app.js"></script>
   </body>
 </html>
