@@ -1,13 +1,13 @@
 var Strollers = Spine.Controller.sub({
   events: {
-    // I shouldn't need to be doing this, but have to work out why the right way isn't working. see below.
     "click .delete": "click",
-    //"click .delete": "delete"
+    "click #category": "category"
   },
   
   init: function() {
     // this.item.bind("destroy", this.proxy(this.destroy));
     Stroller.bind("refresh change", this.counter);
+    Stroller.bind("destroy", this.remove);
   },
   
   render: function() {
@@ -24,8 +24,31 @@ var Strollers = Spine.Controller.sub({
     }
   },
   
+  // probably a better way to update the view, too
+  remove: function(item) {
+    $(".listing").each(function() {
+      if ($(this).text() === item.name) {
+        $(this).remove();
+      }
+    })
+  },
+  
   counter: function() {
     $("#counter").html(Stroller.all().length);
-  }
+  },
+  category: function(stroller) {
+    Stroller.each(function(item) {
+      var num = item.categories.length,
+          text =  $(event.target).text();
+      for (var i = 0; i < num; i++) {
+        if (item.categories[i] === text) {
+          return;
+        }
+        else {
+          item.destroy();
+        }
+      }
+    });
+  },
   
 });
