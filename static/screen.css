@@ -31,6 +31,13 @@ body {
   vertical-align: top;
 }
 
-.destroy {
+.delete {
   cursor: pointer;
+  margin: 3px 0;
+}
+
+#counter {
+  float: right;
+  font-size: 3em;
+  margin-right: 30px;
 }

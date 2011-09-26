@@ -1,7 +1,5 @@
-  var Stroller = Spine.Model.setup("Stroller", 
-                                    ["name", "categories", "brand", "price", "stars", "traits", "weightcap", "image"]
-                                    );
-  
-  Stroller.render = function() {
-    console.log(this.item);
-  }
+// hi, I'm just a humble little Stroller model
+
+var Stroller = Spine.Model.sub();
+
+Stroller.configure("Stroller", "name", "categories", "brand", "price", "stars", "traits", "weightcap", "image");
