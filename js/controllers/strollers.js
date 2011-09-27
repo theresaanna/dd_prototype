@@ -1,7 +1,7 @@
 var Strollers = Spine.Controller.sub({
   events: {
     "click .delete": "click",
-    "click #category": "category"
+    "click .category": "category"
   },
   
   init: function() {
@@ -36,17 +36,21 @@ var Strollers = Spine.Controller.sub({
   counter: function() {
     $("#counter").html(Stroller.all().length);
   },
-  category: function(stroller) {
+  
+  category: function() {
     Stroller.each(function(item) {
       var num = item.categories.length,
-          text =  $(event.target).text();
+          text = $(event.target).text();
       for (var i = 0; i < num; i++) {
         if (item.categories[i] === text) {
-          return;
+          var match = 'yes';
         }
-        else {
-          item.destroy();
-        }
+      }
+      if (match) {
+        return;
+      }
+      else {
+        item.destroy();
       }
     });
   },

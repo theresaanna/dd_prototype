@@ -32,14 +32,13 @@ body {
 }
 
 .delete,
-#category {
+.category {
   cursor: pointer;
   margin: 3px 0;
 }
 
-#category {
+.category {
   margin-bottom: 20px;
-  font-size: 3em;
 }
 
 #counter {
