@@ -26,16 +26,6 @@ var Strollers = Spine.Controller.sub({
     this.list.append($("#stroller-list").tmpl(this.item));
   },
   
-  click: function() {
-    // for some reason, every Stroller item gets erased if I do it the way that it should work
-    // this is a workaround for refactor or likely removal
-    this.el = $(event.target);
-    this.el.remove();
-    if (this.item.name === this.el.text()) {
-      this.item.destroy();
-    }
-  },
-  
   // probably a better way to update the view when active listings change, refactor
   remove: function(item) {
     $(".listing").each(function() {
