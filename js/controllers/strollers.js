@@ -39,7 +39,15 @@ var Strollers = Spine.Controller.sub({
   },
     
   categoryActivate: function() {
+    // toggle classes on the clicked element so that the appropriate event gets called
     $(event.target).addClass("active").removeClass("inactive");
+    
+    // for each category on each instance of Stroller, ultimately return
+    // if the clicked category is present on the instance or remove it from
+    // Stroller and put it into a new instance of PurgatoryItem.
+    // this is better than setting a flag on the Stroller instance because
+    // going forward, we can rely on all records in Stroller being active
+    // and do not have to do checks or suppress events
     Stroller.each(function(item) {
       var num = item.categories.length,
           text = $(event.target).text();
@@ -53,6 +61,8 @@ var Strollers = Spine.Controller.sub({
       }
       else {
         PurgatoryItem.create({
+          // preserve what category it was deleted from for easy
+          // toggling back if the user brings back this category
           deactiveCat: text,
           name: item.name,
           categories: item.categories,
@@ -69,7 +79,11 @@ var Strollers = Spine.Controller.sub({
   },
   
   categoryDeactivate: function() {
+    // toggle classes on the clicked element so that the appropriate event gets called
     $(event.target).addClass("inactive").removeClass("active");
+    
+    // for each instance of PurgatoryItem that once again meets the active criteria,
+    // create a Stroller instance and remove its PurgatoryItem instance
     PurgatoryItem.each(function(record) {
       var cat = $(event.target).text();
         if (record.deactiveCat === cat) {
