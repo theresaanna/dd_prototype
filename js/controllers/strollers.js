@@ -1,7 +1,8 @@
 var Strollers = Spine.Controller.sub({
   events: {
     "click .delete": "click",
-    "click .category": "category"
+    "click .category.active": "categoryDeactivate",
+    "click .category.inactive": "categoryActivate"
   },
   
   init: function() {
@@ -15,7 +16,7 @@ var Strollers = Spine.Controller.sub({
   },
   
   click: function() {
-    // for some reason, every Stroller record gets erased if I do it the way that it should work
+    // for some reason, every Stroller item gets erased if I do it the way that it should work
     // this is a workaround for refactor
     this.el = $(event.target);
     this.el.remove();
@@ -36,8 +37,9 @@ var Strollers = Spine.Controller.sub({
   counter: function() {
     $("#counter").html(Stroller.all().length);
   },
-  
-  category: function() {
+    
+  categoryActivate: function() {
+    $(event.target).addClass("active").removeClass("inactive");
     Stroller.each(function(item) {
       var num = item.categories.length,
           text = $(event.target).text();
@@ -50,9 +52,40 @@ var Strollers = Spine.Controller.sub({
         return;
       }
       else {
+        PurgatoryItem.create({
+          deactiveCat: text,
+          name: item.name,
+          categories: item.categories,
+          brand: item.brand,
+          price: item.price,
+          stars: item.stars,
+          traits: item.traits,
+          weightcap: item.weightcap,
+          image: item.image
+        });
         item.destroy();
       }
     });
   },
+  
+  categoryDeactivate: function() {
+    $(event.target).addClass("inactive").removeClass("active");
+    PurgatoryItem.each(function(record) {
+      var cat = $(event.target).text();
+        if (record.deactiveCat === cat) {
+          Stroller.create({
+            name: record.name,
+            categories: record.categories,
+            brand: record.brand,
+            price: record.price,
+            stars: record.stars,
+            traits: record.traits,
+            weightcap: record.weightcap,
+            image: record.image
+          });
+          record.destroy();
+        }
+      });
+  }
   
 });

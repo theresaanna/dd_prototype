@@ -41,6 +41,10 @@ body {
   margin-bottom: 20px;
 }
 
+.category.active {
+  color: red;
+}
+
 #counter {
   float: right;
   font-size: 3em;
