@@ -32,20 +32,28 @@ body {
   vertical-align: top;
 }
 
+h1 {
+  font-size: 1.2em;
+  margin: 10px 0 5px 0;
+}
+
 .delete,
 .category,
-.brand {
+.brand,
+.star {
   cursor: pointer;
   margin: 3px 0;
 }
 
 .category,
-.brand {
-  margin-bottom: 20px;
+.brand,
+.star {
+  margin-bottom: 5px;
 }
 
 .category.active,
-.brand.active {
+.brand.active,
+.star.active {
   color: red;
 }
 
