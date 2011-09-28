@@ -9,12 +9,14 @@ jQuery(function($) {
 var Menu = Spine.Controller.sub({
   
   elements: {
-    ".listing": "list"
+    ".listing": "list",
+    "#brand-list": "brandList"
   },
 
   init: function() {
     // When a new Stroller instance is created, it runs the above "add" method
     Stroller.bind("create", this.proxy(this.add));
+    Stroller.bind("setup", this.proxy(this.setup));
     
     // grab JSON and create a new Stroller for each result
     $.getJSON('feed.json', function(data) {
@@ -30,6 +32,7 @@ var Menu = Spine.Controller.sub({
           image: this.image
         });
       });
+      Stroller.trigger("setup");
     });
   },
   
@@ -41,5 +44,26 @@ var Menu = Spine.Controller.sub({
     // delegate to the Strollers controller render method
     this.list.append(s.render());
   },
+  
+  // after init runs and we populate the Stroller model instances,
+  // we want to generate the menu items and attach data to the DOM elements
+  // that toggle criteria active/inactive so that we can repurpose logic that
+  // makes determinations about whether items should remain active
+  setup: function() {
+    this.renderList();
+    
+    // to be refactored. should be a little more elegant.
+    $("#brand-list div").data({"type": "brand"});
+    $(".category").data({"type": "category"});
+  },
+  
+  // fetch the brand listing from the Stroller model method and template them
+  renderList: function() {
+    var brands = Stroller.brands(),
+        list = this.brandList;
+    $.each(brands, function(k, brand) {
+      list.append($("#brand-list-tmpl").tmpl({brand: brand}));
+    })
+  }
     
 });  

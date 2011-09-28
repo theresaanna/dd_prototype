@@ -19,7 +19,15 @@
       <img src="static/header.png"/>
       <div id="menu">
         <div id="list">
+          
           <div id="counter"></div>
+          
+            <div id="listings">
+              <script type="text/x-jquery-tmpl" id="stroller-list">
+                <div class="listing delete">${name}</div>
+              </script>
+            </div>
+          
           <h1>Categories</h1>
           <div class="category inactive">Full-Featured</div>
           <div class="category inactive">Car Seat</div>
@@ -27,19 +35,25 @@
           <div class="category inactive">Jogging</div>
           <div class="category inactive">Umbrella</div>
           <div class="category inactive">All-Terrain</div>
-          <script type="text/x-jquery-tmpl" id="stroller-list">
-            <div class="listing delete">${name}</div>
-          </script>
-        </div>
+          
+          <div id="brand-list">
+            <h1>Brands</h1>
+            <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
+            <div class="brand inactive">${brand}</div>
+            </script>
+          </div>
         
-      </div>
+      </div> <!-- /list -->
+    </div>
+      
       <div class="inner">
         <img src="static/content-header.png"/>
         <div class="good-stuff">
           <img src="static/main.png" class="main"/>
         </div>
         <img src="static/sidebar.png"/>
-      </div>
+      </div> <!-- /inner -->
+      
       <img src="static/footer.png"/>
     </div>
   </body>
