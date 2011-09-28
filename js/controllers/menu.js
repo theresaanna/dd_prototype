@@ -10,7 +10,8 @@ var Menu = Spine.Controller.sub({
   
   elements: {
     ".listing": "list",
-    "#brand-list": "brandList"
+    "#brand-list": "brandList",
+    "#traits-list": "traitsList"
   },
 
   init: function() {
@@ -50,20 +51,22 @@ var Menu = Spine.Controller.sub({
   // that toggle criteria active/inactive so that we can repurpose logic that
   // makes determinations about whether items should remain active
   setup: function() {
-    this.renderList();
+    this.renderList("brand", this.brandList);
+    this.renderList("traits", this.traitsList);
     
     // to be refactored. should be a little more elegant.
     $("#brand-list div").data({"type": "brand"});
     $(".category").data({"type": "category"});
     $(".star").data({"type": "star"});
+    $(".trait").data({"type": "traits"});
   },
   
-  // fetch the brand listing from the Stroller model method and template them
-  renderList: function() {
-    var brands = Stroller.brands(),
-        list = this.brandList;
-    $.each(brands, function(k, brand) {
-      list.append($("#brand-list-tmpl").tmpl({brand: brand}));
+  // fetch the various criteria listings from the Stroller model method and template them
+  renderList: function(type, ele) {
+    var data = Stroller.criteriaList(type),
+        list = ele;
+    $.each(data, function(k, item) {
+      list.append($("#" + type + "-list-tmpl").tmpl({criteria: item}));
     })
   }
     

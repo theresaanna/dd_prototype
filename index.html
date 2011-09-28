@@ -28,28 +28,39 @@
               </script>
             </div>
           
-          <h1>Categories</h1>
-          <div class="category inactive">Full-Featured</div>
-          <div class="category inactive">Car Seat</div>
-          <div class="category inactive">Double</div>
-          <div class="category inactive">Jogging</div>
-          <div class="category inactive">Umbrella</div>
-          <div class="category inactive">All-Terrain</div>
+          <div class="column">
+            <h1>Categories</h1>
+            <div class="category inactive">Full-Featured</div>
+            <div class="category inactive">Car Seat</div>
+            <div class="category inactive">Double</div>
+            <div class="category inactive">Jogging</div>
+            <div class="category inactive">Umbrella</div>
+            <div class="category inactive">All-Terrain</div>
           
-          <div id="brand-list">
-            <h1>Brands</h1>
-            <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-            <div class="brand inactive">${brand}</div>
-            </script>
+            <div id="brand-list">
+              <h1>Brands</h1>
+              <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
+              <div class="brand inactive">${criteria}</div>
+              </script>
+            </div>
+          
+            <div id="star-list">
+              <h1>Star</h1>
+              <div class="star inactive">1</div>
+              <div class="star inactive">2</div>
+              <div class="star inactive">3</div>
+              <div class="star inactive">4</div>
+              <div class="star inactive">5</div>
+            </div>
           </div>
           
-          <div id="star-list">
-            <h1>Star</h1>
-            <div class="star inactive">1</div>
-            <div class="star inactive">2</div>
-            <div class="star inactive">3</div>
-            <div class="star inactive">4</div>
-            <div class="star inactive">5</div>
+          <div class="column">
+            <div id="traits-list">
+              <h1>Traits</h1>
+              <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
+              <div class="trait inactive">${criteria}</div>
+              </script>
+            </div>
           </div>
         
       </div> <!-- /list -->

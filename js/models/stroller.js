@@ -5,16 +5,36 @@ var Stroller = Spine.Model.sub();
 Stroller.configure("Stroller", "name", "categories", "brand", "price", "stars", "traits", "weightcap", "image");
 
 Stroller.extend({
-  brands: function() {
-    var brands = [];
+  // method to get a list of criteria of a particular sort (i.e. brands, etc)
+  // for rendering
+  criteriaList: function(type) {
+    var list = [];
     Stroller.each(function(item) {
-      if ($.inArray(item.brand, brands) !== -1) {
-        return;
+      
+      // if we've passed in an array object instead of a single
+      // value for each Stroller instance, handle accordingly
+      // also, needs a refactor. this is ugly.
+      if (typeof item[type] === "object") {
+        for (var i = 0; i < item[type].length; i++) {
+          if ($.inArray(item[type][i], list) !== -1) {
+            return;
+          }
+          else {
+            list.push(item[type][i]);
+          }
+        }
       }
+      
+      // single version
       else {
-        brands.push(item.brand);
+        if ($.inArray(item[type], list) !== -1) {
+          return;
+        }
+        else {
+          list.push(item[type]);
+        }
       }
     });
-    return brands;
+    return list;
   }
 });

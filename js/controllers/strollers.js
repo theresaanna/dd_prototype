@@ -6,7 +6,9 @@ var Strollers = Spine.Controller.sub({
     "click .brand.inactive": "criteriaActivate",
     "click .brand.active": "criteriaDeactivate",
     "click .star.inactive": "criteriaActivate",
-    "click .star.active": "criteriaDeactivate"
+    "click .star.active": "criteriaDeactivate",
+    "click .trait.inactive": "criteriaActivate",
+    "click .trait.active": "criteriaDeactivate"
   },
   
   elements: {
@@ -86,6 +88,14 @@ var Strollers = Spine.Controller.sub({
       else if (criteria == "star") {
         if (parseInt(item.stars) >= parseInt(value)) {
           var match = 'yes';
+        }
+      }
+      else if (criteria == "traits") {
+        var num = item.traits.length
+        for (var i = 0; i < num; i++) {
+          if (item.traits[i] === value) {
+            var match = 'yes';
+          }
         }
       }
 

@@ -40,20 +40,23 @@ h1 {
 .delete,
 .category,
 .brand,
-.star {
+.star,
+.trait {
   cursor: pointer;
   margin: 3px 0;
 }
 
 .category,
 .brand,
-.star {
+.star,
+.trait {
   margin-bottom: 5px;
 }
 
 .category.active,
 .brand.active,
-.star.active {
+.star.active,
+.trait.active {
   color: red;
 }
 
@@ -65,4 +68,9 @@ h1 {
 
 #listings {
   float: right;
+}
+
+.column {
+  float: left;
+  margin-right: 20px;
 }
