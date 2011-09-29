@@ -3,6 +3,21 @@ body {
   padding: 0;
   font-family: Arial,Helvetica,sans-serif;
   background: url(bg-body.gif) repeat left top;
+  font-size: 80%;
+}
+
+a {
+  text-decoration: none;
+  color: #444444;
+}
+
+.rounded {
+  border: 1px solid #e4e4e3;
+  border-radius: 12px;
+}
+
+.serif {
+  font-family: Georgia, serif;
 }
 
 .content {
@@ -37,6 +52,12 @@ h1 {
   margin: 10px 0 5px 0;
 }
 
+#menu {
+  background: url(grey-diagonal-pattern.gif);
+  overflow: hidden;
+  padding: 0 5px;
+}
+
 .delete,
 .category,
 .brand,
@@ -63,21 +84,6 @@ h1 {
   color: red;
 }
 
-#counter {
-  float: right;
-  font-size: 3em;
-  margin-right: 30px;
-}
-
-#listings {
-  float: right;
-}
-
-.column {
-  float: left;
-  margin-right: 20px;
-}
-
 .container {
   position: relative;
   margin-top: 30px;
@@ -96,6 +102,47 @@ h1 {
   z-index: 2;
   height: 36px;
   width: 5px;
+}
+
+#control-panel {
+  background-image: -webkit-linear-gradient(#f9f8f5, #f3f4eb);
+  padding: 10px 15px;
+  float: left;
+}
+
+#counter {
+  color: #7e1f3f;
+  padding-right: 10px;
+  border-right: 1px dotted #d6d6d4;
+  margin-right: 10px;
+  float: left;
+  font-size: 1.7em;
+  width: 40px;
+  text-align: center;
+}
+
+#controls {
+  float: left;
+}
+
+#go-button {
+  display: inline-block;
+  background-image: -webkit-linear-gradient(#7f102c, #6a0d25);
+  color: #fff;
+  padding: 3px 8px;
+  font-weight: bold;
+}
+
+.arrow {
+  background: url(spritey-bits.png) no-repeat right -10px;
+  padding-right: 16px;
+}
+
+.clear {
+  font-size: .8em;
+  clear: left;
+  text-align: center;
+  display: block;
 }
 
 #amount {
