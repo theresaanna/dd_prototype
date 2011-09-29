@@ -15,7 +15,19 @@
     <script src="js/controllers/menu.js"></script>
     <script>
     $(document).ready(function() {
-      $("#slider").slider({animate:true, value: 100});
+      $("#slider").slider({ animate:true, 
+                            min: 0, 
+                            max: 1600,
+                            step: 50,
+                            value: 1600,
+                            slide: function(event, ui) {
+  			                            $("#amount").text("$" + ui.value);
+  			                            $(this).data({type: "price", value: ui.value});
+  			                            Stroller.trigger("priceremove");
+  			                            Stroller.trigger("pricechange");
+  			                    }
+  		});
+  		$("#amount").text("$" + $("#slider").slider("value"));
     });
     </script>
   </head>
@@ -72,12 +84,14 @@
             
             <div id="weights-list">
               <h1>Weight Limits</h1>
-              <script type="text/x-jquery-tmpl" id="weightcap-list-tmpl">
+              <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
               <div class="weight inactive">${criteria}</div>
               </script>
             </div>
             
             <div class="container">
+              <h1>Price</h1>
+              <div id="amount"></div>
               <div id="slider"></div>
             </div>
           </div>

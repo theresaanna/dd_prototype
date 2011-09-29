@@ -21,6 +21,8 @@ var Strollers = Spine.Controller.sub({
     // this.item.bind("destroy", this.proxy(this.destroy));
     Stroller.bind("refresh change", this.counter);
     Stroller.bind("destroy", this.remove);
+    Stroller.bind("pricechange", this.criteriaActivate);
+    Stroller.bind("priceremove", this.criteriaDeactivate);
   },
   
   // render item list, soon to be removed/refactored
@@ -48,7 +50,7 @@ var Strollers = Spine.Controller.sub({
     // cache the criteria that is being evaluated on this call
     var criteria = $(event.target).data("type"),
     // and the specific value selected
-        value = $(event.target).text();
+        value = $(event.target).data("value");
     
     
     // toggle classes on the clicked element so that the appropriate event gets called
@@ -82,7 +84,7 @@ var Strollers = Spine.Controller.sub({
           var match = 'yes';
         }
       }
-      else if (criteria == "traits") {
+      else if (criteria == "trait") {
         var num = item.traits.length
         for (var i = 0; i < num; i++) {
           if (item.traits[i] === value) {
@@ -90,8 +92,13 @@ var Strollers = Spine.Controller.sub({
           }
         }
       }
-      else if (criteria == "weightcap") {
-        if ($.inArray(value, item.weightcap) !== -1) {
+      else if (criteria == "weight") {
+        if ($.inArray(value, item.weight) !== -1) {
+          var match = 'yes';
+        }
+      }
+      else if (criteria == "price") {
+        if (item.price <= value) {
           var match = 'yes';
         }
       }
@@ -112,7 +119,7 @@ var Strollers = Spine.Controller.sub({
           price: item.price,
           stars: item.stars,
           traits: item.traits,
-          weightcap: item.weightcap,
+          weight: item.weight,
           image: item.image
         });
         item.destroy();
@@ -123,12 +130,14 @@ var Strollers = Spine.Controller.sub({
   criteriaDeactivate: function() {
     // toggle classes on the clicked element so that the appropriate event gets called
     $(event.target).addClass("inactive").removeClass("active");
-    
+
     // for each instance of PurgatoryItem that once again meets the active criteria,
     // create a Stroller instance and remove its PurgatoryItem instance
     PurgatoryItem.each(function(record) {
-      var criteria = $(event.target).text();
-        if (record.removed === criteria) {
+      var criteria = $(event.target).data("value");
+
+      // when we are resetting the price, the value won't and shouldn't match
+        if (record.removed === criteria || $(event.target).data("type") === "price") {
           Stroller.create({
             name: record.name,
             categories: record.categories,
@@ -136,12 +145,11 @@ var Strollers = Spine.Controller.sub({
             price: record.price,
             stars: record.stars,
             traits: record.traits,
-            weightcap: record.weightcap,
+            weight: record.weight,
             image: record.image
           });
           record.destroy();
         }
       });
-  }
-  
+  }  
 });

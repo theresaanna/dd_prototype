@@ -30,7 +30,7 @@ var Menu = Spine.Controller.sub({
           price: this.price,
           stars: this.stars,
           traits: this.traits,
-          weightcap: this.weightcap,
+          weight: this.weight,
           image: this.image
         });
       });
@@ -54,14 +54,19 @@ var Menu = Spine.Controller.sub({
   setup: function() {
     this.renderList("brand", this.brandList);
     this.renderList("traits", this.traitsList);
-    this.renderList("weightcap", this.weightList);
+    this.renderList("weight", this.weightList);
     
-    // to be refactored. should be a little more elegant.
-    $("#brand-list div").data({"type": "brand"});
-    $(".category").data({"type": "category"});
-    $(".star").data({"type": "star"});
-    $(".trait").data({"type": "traits"});
-    $(".weight").data({"type": "weightcap"});
+    // attach data to the DOM elements for each criteria so that 
+    // when an event fires, we can read the data off of the element
+    // to know what should change
+    // price is not in this array as it is bound in the UI JS
+    var criteria = ["brand", "category", "star", "trait", "weight"];
+    
+    $.each(criteria, function(i, c) {
+      $("." + c).each(function(k, ele) {
+        $(this).data({"type": c, "value": $(this).text()})
+      });
+    });
   },
   
   // fetch the various criteria listings from the Stroller model method and template them

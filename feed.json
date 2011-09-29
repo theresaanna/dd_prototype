@@ -11,7 +11,7 @@
       "urban",
       "active"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -29,7 +29,7 @@
       "urban",
       "active"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -50,7 +50,7 @@
       "active",
       "suburban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"
@@ -76,7 +76,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -99,7 +99,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -121,7 +121,7 @@
       "active",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -144,7 +144,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"
@@ -164,7 +164,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -185,7 +185,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -205,7 +205,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -228,7 +228,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -247,7 +247,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"
@@ -268,7 +268,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -290,7 +290,7 @@
       "active",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"
@@ -312,7 +312,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -332,7 +332,7 @@
       "active",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year"
     ],
@@ -353,7 +353,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"
@@ -375,7 +375,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years",
@@ -397,7 +397,7 @@
       "suburban",
       "urban"
     ],
-    "weightcap": [
+    "weight": [
       "1 - 2.5 years"
     ],
     "image": ""
@@ -416,7 +416,7 @@
       "rural",
       "suburban"
     ],
-    "weightcap": [
+    "weight": [
       "0-6 months",
       "6 months - 1 year",
       "1 - 2.5 years"

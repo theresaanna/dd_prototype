@@ -2,7 +2,7 @@
 
 var Stroller = Spine.Model.sub();
 
-Stroller.configure("Stroller", "name", "categories", "brand", "price", "stars", "traits", "weightcap", "image");
+Stroller.configure("Stroller", "name", "categories", "brand", "price", "stars", "traits", "weight", "image");
 
 Stroller.extend({
   // method to get a list of criteria of a particular sort (i.e. brands, etc)
