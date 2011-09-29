@@ -15,19 +15,20 @@ Stroller.extend({
       // value for each Stroller instance, handle accordingly
       // also, needs a refactor. this is ugly.
       if (typeof item[type] === "object") {
-        for (var i = 0; i < item[type].length; i++) {
-          if ($.inArray(item[type][i], list) !== -1) {
+        $.each(item[type], function(i, val) {
+          if ($.inArray(item[type][i], list) != -1) {
             return;
           }
           else {
             list.push(item[type][i]);
           }
-        }
+        });
       }
       
       // single version
       else {
         if ($.inArray(item[type], list) !== -1) {
+          
           return;
         }
         else {
@@ -35,6 +36,7 @@ Stroller.extend({
         }
       }
     });
+    
     return list;
   }
 });

@@ -6,12 +6,18 @@
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="js/lib/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="js/spine.js"></script>
     <script src="js/lib/spine.tmpl.js"></script>
     <script src="js/models/stroller.js"></script>
     <script src="js/models/purgatoryitem.js"></script>
     <script src="js/controllers/strollers.js"></script>
     <script src="js/controllers/menu.js"></script>
+    <script>
+    $(document).ready(function() {
+      $("#slider").slider({animate:true, value: 100});
+    });
+    </script>
   </head>
   
   <body>
@@ -54,12 +60,25 @@
             </div>
           </div>
           
+          
+          
           <div class="column">
             <div id="traits-list">
               <h1>Traits</h1>
               <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
               <div class="trait inactive">${criteria}</div>
               </script>
+            </div>
+            
+            <div id="weights-list">
+              <h1>Weight Limits</h1>
+              <script type="text/x-jquery-tmpl" id="weightcap-list-tmpl">
+              <div class="weight inactive">${criteria}</div>
+              </script>
+            </div>
+            
+            <div class="container">
+              <div id="slider"></div>
             </div>
           </div>
         

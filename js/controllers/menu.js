@@ -11,7 +11,8 @@ var Menu = Spine.Controller.sub({
   elements: {
     ".listing": "list",
     "#brand-list": "brandList",
-    "#traits-list": "traitsList"
+    "#traits-list": "traitsList",
+    "#weights-list": "weightList"
   },
 
   init: function() {
@@ -53,12 +54,14 @@ var Menu = Spine.Controller.sub({
   setup: function() {
     this.renderList("brand", this.brandList);
     this.renderList("traits", this.traitsList);
+    this.renderList("weightcap", this.weightList);
     
     // to be refactored. should be a little more elegant.
     $("#brand-list div").data({"type": "brand"});
     $(".category").data({"type": "category"});
     $(".star").data({"type": "star"});
     $(".trait").data({"type": "traits"});
+    $(".weight").data({"type": "weightcap"});
   },
   
   // fetch the various criteria listings from the Stroller model method and template them

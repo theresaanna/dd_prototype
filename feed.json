@@ -6,14 +6,14 @@
     ],
     "brand": "Baby Jogger",
     "price": "399.99",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "urban",
       "active"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -24,14 +24,14 @@
     ],
     "brand": "Baby Jogger",
     "price": "239.99",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "urban",
       "active"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -44,16 +44,16 @@
     ],
     "brand": "Baby Jogger",
     "price": "239.99",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "rural",
       "active",
       "suburban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -69,7 +69,7 @@
     ],
     "brand": "Mountain Buggy",
     "price": "449.99",
-    "stars": "3",
+    "stars": "1 - 2.5 years",
     "traits": [
       "rural",
       "active",
@@ -77,10 +77,10 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -100,10 +100,10 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -122,8 +122,8 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -137,7 +137,7 @@
     ],
     "brand": "Graco",
     "price": "147.00",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "rural",
       "active",
@@ -145,9 +145,9 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -159,14 +159,14 @@
     ],
     "brand": "Graco",
     "price": "449.99",
-    "stars": "2",
+    "stars": "6 months - 1 year",
     "traits": [
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -186,8 +186,8 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -199,17 +199,17 @@
     ],
     "brand": "Maclaren",
     "price": "700",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "rural",
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -223,14 +223,14 @@
     ],
     "brand": "Maclaren",
     "price": "264.99",
-    "stars": "1",
+    "stars": "0-6 months",
     "traits": [
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -242,15 +242,15 @@
     ],
     "brand": "Maclaren",
     "price": "84.88",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -262,17 +262,17 @@
     ],
     "brand": "Bugaboo",
     "price": "1200",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "active",
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -285,15 +285,15 @@
     ],
     "brand": "Bugaboo",
     "price": "649.00",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "active",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -313,10 +313,10 @@
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -327,14 +327,14 @@
     ],
     "brand": "Bumbleride",
     "price": "599.00",
-    "stars": "2",
+    "stars": "6 months - 1 year",
     "traits": [
       "active",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2"
+      "0-6 months",
+      "6 months - 1 year"
     ],
     "image": ""
   },
@@ -347,16 +347,16 @@
     ],
     "brand": "Kolcraft",
     "price": "163.13",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "active",
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -369,17 +369,17 @@
     ],
     "brand": "Peg-Perego",
     "price": "300.00",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "rural",
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3",
-      "4"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years",
+      "2.5 years and over"
     ],
     "image": ""
   },
@@ -391,16 +391,14 @@
     ],
     "brand": "Baby Trend",
     "price": "135.00",
-    "stars": "4",
+    "stars": "2.5 years and over",
     "traits": [
       "rural",
       "suburban",
       "urban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "1 - 2.5 years"
     ],
     "image": ""
   },
@@ -413,15 +411,15 @@
     ],
     "brand": "Inglesina",
     "price": "250.00",
-    "stars": "3",
+    "stars": "1 - 2.5 years",
     "traits": [
       "rural",
       "suburban"
     ],
     "weightcap": [
-      "1",
-      "2",
-      "3"
+      "0-6 months",
+      "6 months - 1 year",
+      "1 - 2.5 years"
     ],
     "image": ""
   }

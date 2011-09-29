@@ -8,7 +8,9 @@ var Strollers = Spine.Controller.sub({
     "click .star.inactive": "criteriaActivate",
     "click .star.active": "criteriaDeactivate",
     "click .trait.inactive": "criteriaActivate",
-    "click .trait.active": "criteriaDeactivate"
+    "click .trait.active": "criteriaDeactivate",
+    "click .weight.inactive": "criteriaActivate",
+    "click .weight.active": "criteriaDeactivate"
   },
   
   elements: {
@@ -86,6 +88,11 @@ var Strollers = Spine.Controller.sub({
           if (item.traits[i] === value) {
             var match = 'yes';
           }
+        }
+      }
+      else if (criteria == "weightcap") {
+        if ($.inArray(value, item.weightcap) !== -1) {
+          var match = 'yes';
         }
       }
 
