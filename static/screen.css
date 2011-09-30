@@ -52,7 +52,6 @@ a {
 
 .inner {
   background-color: #f8f7f3;
-  margin-top: -4px;
   clear: both;
 }
 
@@ -78,7 +77,8 @@ h1 {
 
 #menu {
   background: url(grey-diagonal-pattern.gif);
-  padding: 0 5px;
+  padding: 0 10px 15px 10px;
+  border-bottom: 1px solid #dedddb;
 }
 
 .delete,
@@ -93,22 +93,28 @@ h1 {
 
 .container {
   position: relative;
-  margin-top: 30px;
+  min-height: 75px;
+}
+
+.container.active {
+  background: #fff;
 }
 
 .ui-slider-horizontal {
-  background-color: #666;
   position: absolute;
-  width: 200px;
-  height: 30px;
+  width: 350px;
+  height: 10px;
+  background-image: -webkit-linear-gradient(#accf55, #85a041);
 }
 
 .ui-slider-handle {
-  border: 2px solid #000;
   position: absolute;
   z-index: 2;
-  height: 36px;
-  width: 5px;
+  height: 47px;
+  width: 15px;
+  background: url(spritey-bits.png) no-repeat left -84px;
+  margin-top: -28px;
+  font-weight: bold;
 }
 
 #control-panel {
@@ -244,15 +250,15 @@ h1 {
   border-radius: 8px;
   border: 1px solid #e4e4e3;
   font-size: .9em;
-  margin: 0;
+  margin: 0 0 0 5px;
 }
 
 .drop-down-title.open {
   background-position: -83px -65px;
   border-bottom: 0;
-  padding-bottom: 40px;
+  padding-bottom: 19px;
   position: relative;
-  z-index: 1;
+  z-index: 3;
   border-radius: 8px 8px 0 0;
 }
 
@@ -265,7 +271,7 @@ h1 {
   position: absolute;
   z-index: 2;
   right: 5px;
-  margin-top: 30px;
+  margin-top: 38px;
   border-radius: 8px;
   border: 1px solid #e4e4e3;
   width: 80%;

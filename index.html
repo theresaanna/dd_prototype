@@ -14,21 +14,28 @@
     <script src="js/controllers/strollers.js"></script>
     <script src="js/controllers/menu.js"></script>
     <script>
+    
+    // the slider functionality is rough at the moment and certainly not fool proof
+    // it works well enough for testing, however, can shore up functionality later
     $(document).ready(function() {
-      $("#slider").slider({ animate:true, 
+      $("#slider-price, #slider-stars").slider({ animate:true, 
+                            range: true,
                             min: 0, 
-                            max: 1600,
+                            max: 1000,
                             step: 50,
-                            value: 1600,
+                            values: [0, 1000],
                             slide: function(event, ui) {
-  			                            $("#amount").text("$" + ui.value);
-  			                            $(this).data({type: "price", value: ui.value});
+  			                            $(this).find(".ui-slider-handle").first().text("$" + ui.values[0]);
+  			                            $(this).find(".ui-slider-handle").last().text("$" + ui.values[1]);
+  			                            $(this).data({type: "price", values: [ui.values[0], ui.values[1]]});
+  			                            $(this).parent().data({type: "price", values: [ui.values[0], ui.values[1]]});
   			                            Stroller.trigger("priceremove");
   			                            Stroller.trigger("pricechange");
   			                    }
   		});
-  		$("#amount").text("$" + $("#slider").slider("value"));
-  		
+  		$(".ui-slider-handle").first().text("$0");
+      $(".ui-slider-handle").last().text("$1000");
+      
   		$(".drop-down-title").click(function(title) {
   		  $(this).toggleClass('open').next().toggleClass('open');
   		});
@@ -71,8 +78,16 @@
             <div class="brand inactive rounded">${criteria}</div>
             </script>
           </div>
-        <br style="clear: both">
-          <div id="star-list" class="menu">
+          
+          <h1 class="drop-down-title">Price</h1>
+          <div class="menu drop-down clearfix">
+            <div id="amount"></div>
+            <div class="container">
+              <div id="slider-price" class="clearfix"></div>
+            </div>
+          </div>
+<!--
+          <div id="star-list" class="menu clearfix">
             <h1>Star</h1>
             <div class="star inactive">1</div>
             <div class="star inactive">2</div>
@@ -95,13 +110,7 @@
             <div class="weight inactive">${criteria}</div>
             </script>
           </div>
-          
-          <div class="container">
-            <h1>Price</h1>
-            <div id="amount"></div>
-            <div id="slider"></div>
-          </div>
-        
+        -->
       </div> <!-- /list -->
     </div>
       
