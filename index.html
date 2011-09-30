@@ -17,8 +17,9 @@
     
     // the slider functionality is rough at the moment and certainly not fool proof
     // it works well enough for testing, however, can shore up functionality later
+    // this is very ugly at the moment. avert your eyes.
     $(document).ready(function() {
-      $("#slider-price, #slider-stars").slider({ animate:true, 
+      $("#slider-price").slider({ animate:true, 
                             range: true,
                             min: 0, 
                             max: 1000,
@@ -29,12 +30,29 @@
   			                            $(this).find(".ui-slider-handle").last().text("$" + ui.values[1]);
   			                            $(this).data({type: "price", values: [ui.values[0], ui.values[1]]});
   			                            $(this).parent().data({type: "price", values: [ui.values[0], ui.values[1]]});
-  			                            Stroller.trigger("priceremove");
-  			                            Stroller.trigger("pricechange");
+  			                            Stroller.trigger("sliderremove");
+  			                            Stroller.trigger("sliderchange");
   			                    }
   		});
-  		$(".ui-slider-handle").first().text("$0");
-      $(".ui-slider-handle").last().text("$1000");
+  		$("#slider-price .ui-slider-handle").first().text("$0");
+      $("#slider-price .ui-slider-handle").last().text("$1000");
+
+      $("#slider-star").slider({ animate:true, 
+                            min: 1, 
+                            max: 5,
+                            step: 1,
+                            value: 1,
+                            slide: function(event, ui) {
+  			                            $(this).find(".ui-slider-handle").text(ui.value);
+  			                            $(this).data({type: "star", value: ui.value});
+  			                            $(this).parent().data({type: "star", value: ui.value});
+  			                            Stroller.trigger("sliderremove");
+  			                            Stroller.trigger("sliderchange");
+  			                    }
+  		});
+  		$("#slider-star .ui-slider-handle").text("1");
+      
+      
       
   		$(".drop-down-title").click(function(title) {
   		  $(this).toggleClass('open').next().toggleClass('open');
@@ -81,21 +99,19 @@
           
           <h1 class="drop-down-title">Price</h1>
           <div class="menu drop-down clearfix">
-            <div id="amount"></div>
             <div class="container">
               <div id="slider-price" class="clearfix"></div>
             </div>
           </div>
-<!--
-          <div id="star-list" class="menu clearfix">
-            <h1>Star</h1>
-            <div class="star inactive">1</div>
-            <div class="star inactive">2</div>
-            <div class="star inactive">3</div>
-            <div class="star inactive">4</div>
-            <div class="star inactive">5</div>
+
+          <h1 class="drop-down-title bottom">Ratings</h1>
+          <div id="star-list" class="menu drop-down bottom clearfix">
+            <div class="container">
+              <div id="slider-star" class="clearfix"></div>
+            </div>
           </div>
           
+          <!--
           <div id="traits-list" class="menu">
             <h1>Traits</h1>
             <script type="text/x-jquery-tmpl" id="traits-list-tmpl">

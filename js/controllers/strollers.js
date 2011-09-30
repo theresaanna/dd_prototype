@@ -21,8 +21,8 @@ var Strollers = Spine.Controller.sub({
     // this.item.bind("destroy", this.proxy(this.destroy));
     Stroller.bind("refresh change", this.counter);
     Stroller.bind("destroy", this.remove);
-    Stroller.bind("pricechange", this.criteriaActivate);
-    Stroller.bind("priceremove", this.criteriaDeactivate);
+    Stroller.bind("sliderchange", this.criteriaActivate);
+    Stroller.bind("sliderremove", this.criteriaDeactivate);
   },
   
   // render item list, soon to be removed/refactored
@@ -148,7 +148,7 @@ var Strollers = Spine.Controller.sub({
         var criteria = $(event.target).data("value");
 
         // when we are resetting the price, the value won't and shouldn't match
-        if (record.removed === criteria || $(event.target).data("type") === "price") {
+        if (record.removed === criteria || $(event.target).data("type") === "price" || $(event.target).data("type") === "star") {
           Stroller.create({
             name: record.name,
             categories: record.categories,

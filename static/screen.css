@@ -53,6 +53,8 @@ a {
 .inner {
   background-color: #f8f7f3;
   clear: both;
+  position: relative;
+  z-index: 1;
 }
 
 .good-stuff {
@@ -93,7 +95,8 @@ h1 {
 
 .container {
   position: relative;
-  min-height: 75px;
+  min-height: 50px;
+  margin-top: 30px;
 }
 
 .container.active {
@@ -109,7 +112,7 @@ h1 {
 
 .ui-slider-handle {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   height: 47px;
   width: 15px;
   background: url(spritey-bits.png) no-repeat left -84px;
@@ -245,12 +248,20 @@ h1 {
   float: left;
   cursor: pointer;
   width: 115px;
-  padding: 5px;
+  padding: 4px 5px;
   font-weight: normal;
   border-radius: 8px;
   border: 1px solid #e4e4e3;
   font-size: .9em;
+  margin: 0 0 5px 5px;
+}
+
+.drop-down-title.bottom {
   margin: 0 0 0 5px;
+}
+
+.drop-down-title.bottom.open {
+  padding-bottom: 13px;
 }
 
 .drop-down-title.open {
@@ -279,12 +290,12 @@ h1 {
   padding: 10px;
 }
 
+.drop-down.open.bottom {
+  margin-top: 60px;
+}
+
 .brand {
   float: left;
   padding: 7px;
   margin-right: 15px;
-}
-
-#amount {
-  height: 30px;
 }

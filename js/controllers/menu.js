@@ -59,8 +59,8 @@ var Menu = Spine.Controller.sub({
     // attach data to the DOM elements for each criteria so that 
     // when an event fires, we can read the data off of the element
     // to know what should change
-    // price is not in this array as it is bound in the UI JS
-    var criteria = ["brand", "category", "star", "trait", "weight"];
+    // price and star are not in this array as they are bound in the UI JS
+    var criteria = ["brand", "category", "trait", "weight"];
     
     $.each(criteria, function(i, c) {
       $("." + c).each(function(k, ele) {
