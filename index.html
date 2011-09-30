@@ -42,7 +42,7 @@
             <div id="counter" class="serif"></div>
             <div id="controls">
               <a href="#" id="go-button" class="serif rounded"><div class="arrow">Strollers</div></a>
-              <a href="#" class="clear">Clear</a>
+              <a href="#" class="clear-link">Clear</a>
             </div>
           </div>
           
@@ -52,54 +52,49 @@
               </script>
             </div> -->
           
-          <div class="column">
-            <h1>Categories</h1>
-            <div class="category inactive">Full-Featured</div>
-            <div class="category inactive">Car Seat</div>
-            <div class="category inactive">Double</div>
-            <div class="category inactive">Jogging</div>
-            <div class="category inactive">Umbrella</div>
-            <div class="category inactive">All-Terrain</div>
-          
-            <div id="brand-list">
-              <h1>Brands</h1>
-              <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-              <div class="brand inactive">${criteria}</div>
-              </script>
-            </div>
-          
-            <div id="star-list">
-              <h1>Star</h1>
-              <div class="star inactive">1</div>
-              <div class="star inactive">2</div>
-              <div class="star inactive">3</div>
-              <div class="star inactive">4</div>
-              <div class="star inactive">5</div>
-            </div>
+          <div id="categories" class="menu">
+            <div class="category inactive rounded car-seat">Car Seat</div>
+            <div class="category inactive rounded double">Double</div>
+            <div class="category inactive rounded jogging">Jogging</div>
+            <div class="category inactive rounded full-featured">Full-Featured</div>
+            <div class="category inactive rounded umbrella">Umbrella</div>
+            <div class="category inactive rounded all-terrain">All-Terrain</div>
           </div>
           
+          <div id="brand-list" class="menu">
+            <h1>Brands</h1>
+            <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
+            <div class="brand inactive">${criteria}</div>
+            </script>
+          </div>
+        
+          <div id="star-list" class="menu">
+            <h1>Star</h1>
+            <div class="star inactive">1</div>
+            <div class="star inactive">2</div>
+            <div class="star inactive">3</div>
+            <div class="star inactive">4</div>
+            <div class="star inactive">5</div>
+          </div>
           
+          <div id="traits-list" class="menu">
+            <h1>Traits</h1>
+            <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
+            <div class="trait inactive">${criteria}</div>
+            </script>
+          </div>
           
-          <div class="column">
-            <div id="traits-list">
-              <h1>Traits</h1>
-              <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
-              <div class="trait inactive">${criteria}</div>
-              </script>
-            </div>
-            
-            <div id="weights-list">
-              <h1>Weight Limits</h1>
-              <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
-              <div class="weight inactive">${criteria}</div>
-              </script>
-            </div>
-            
-            <div class="container">
-              <h1>Price</h1>
-              <div id="amount"></div>
-              <div id="slider"></div>
-            </div>
+          <div id="weights-list" class="menu">
+            <h1>Weight Limits</h1>
+            <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
+            <div class="weight inactive">${criteria}</div>
+            </script>
+          </div>
+          
+          <div class="container">
+            <h1>Price</h1>
+            <div id="amount"></div>
+            <div id="slider"></div>
           </div>
         
       </div> <!-- /list -->
