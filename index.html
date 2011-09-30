@@ -28,6 +28,10 @@
   			                    }
   		});
   		$("#amount").text("$" + $("#slider").slider("value"));
+  		
+  		$(".drop-down-title").click(function(title) {
+  		  $(this).toggleClass('open').next().toggleClass('open');
+  		});
     });
     </script>
   </head>
@@ -35,7 +39,7 @@
   <body>
     <div class="content">
       <img src="static/header.png"/>
-      <div id="menu">
+      <div id="menu" class="clearfix">
         <div id="list">
           
           <div id="control-panel" class="rounded">
@@ -61,13 +65,13 @@
             <div class="category inactive rounded all-terrain">All-Terrain</div>
           </div>
           
-          <div id="brand-list" class="menu">
-            <h1>Brands</h1>
+          <h1 class="drop-down-title">Brand</h1>
+          <div id="brand-list" class="menu drop-down clearfix">
             <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-            <div class="brand inactive">${criteria}</div>
+            <div class="brand inactive rounded">${criteria}</div>
             </script>
           </div>
-        
+        <br style="clear: both">
           <div id="star-list" class="menu">
             <h1>Star</h1>
             <div class="star inactive">1</div>
@@ -80,6 +84,7 @@
           <div id="traits-list" class="menu">
             <h1>Traits</h1>
             <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
+
             <div class="trait inactive">${criteria}</div>
             </script>
           </div>
