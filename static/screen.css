@@ -159,6 +159,11 @@ a {
   clear: left;
   text-align: center;
   display: block;
+  height: 13px;
+}
+
+.text-hide {
+  text-indent: -9999px;
 }
 
 /* stroller menu items */
@@ -249,8 +254,11 @@ a {
   display: none;
 }
 
-.drop-down.open {
+.open {
   display: block;
+}
+
+.drop-down.open {
   position: absolute;
   z-index: 2;
   right: 5px;

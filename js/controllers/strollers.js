@@ -10,7 +10,8 @@ var Strollers = Spine.Controller.sub({
     "click .trait.inactive": "criteriaActivate",
     "click .trait.active": "criteriaDeactivate",
     "click .weight.inactive": "criteriaActivate",
-    "click .weight.active": "criteriaDeactivate"
+    "click .weight.active": "criteriaDeactivate",
+    "click .clear-link": "resetAll"
   },
   
   elements: {
@@ -20,6 +21,7 @@ var Strollers = Spine.Controller.sub({
   init: function() {
     // this.item.bind("destroy", this.proxy(this.destroy));
     Stroller.bind("refresh change", this.counter);
+    PurgatoryItem.bind("refresh change", this.counter);
     Stroller.bind("destroy", this.remove);
     Stroller.bind("sliderchange", this.criteriaActivate);
     Stroller.bind("sliderremove", this.criteriaDeactivate);
@@ -41,7 +43,39 @@ var Strollers = Spine.Controller.sub({
   
   // rerender the counter
   counter: function() {
-    $("#counter").html(Stroller.all().length);
+    var currentLength = Stroller.all().length + PurgatoryItem.all().length;
+    if (Stroller.all().length === currentLength) {
+      $("#counter").html("All");
+      $(".clear-link").addClass("text-hide");
+    }
+    else {
+      $("#counter").html(Stroller.all().length);
+      $(".clear-link").removeClass("text-hide");
+    }
+  },
+  
+  // reset all options when the clear link is clicked
+  // super ghetto. should get merged with criteriaDeactivate. or the 
+  // actual create/destroy loop should be abstracted. or something.
+  resetAll: function(e) {
+    console.log(e);
+    e.preventDefault();
+    $(".active").each(function(i) {
+      $(this).addClass("inactive").removeClass("active");
+    });
+    PurgatoryItem.each(function(record) {
+      Stroller.create({
+        name: record.name,
+        categories: record.categories,
+        brand: record.brand,
+        price: record.price,
+        stars: record.stars,
+        traits: record.traits,
+        weight: record.weight,
+        image: record.image
+      });
+      record.destroy();
+    });
   },
     
   // the primary logic that decides, when any criteria is clicked, what Stroller instances
