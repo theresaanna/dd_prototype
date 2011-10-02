@@ -18,6 +18,7 @@
     // the slider functionality is rough at the moment and certainly not fool proof
     // it works well enough for testing, however, can shore up functionality later
     // this is very ugly at the moment. avert your eyes.
+    // jQuery wastelaaaaand
     $(document).ready(function() {
       $("#slider-price").slider({ animate:true, 
                             range: true,
@@ -52,10 +53,22 @@
   		});
   		$("#slider-star .ui-slider-handle").text("1");
       
+      $(".close-button").click(function() {
+        $("#menu .open").removeClass("open");
+      });
       
-      
+      // if we click on another tab while one is open, ensure that the new one opens
+      // and the other shuts
   		$(".drop-down-title").click(function(title) {
   		  $(this).toggleClass('open').next().toggleClass('open');
+  		  $(".drop-down-title.open").each(function(i) {
+  		    if (this === event.target) {
+  		      return;
+  		    }
+  		    else {
+  		      $(this).toggleClass('open').next().toggleClass('open');
+  		    }
+  		  });
   		});
     });
     </script>
@@ -90,43 +103,50 @@
             <div class="category inactive rounded all-terrain">All-Terrain</div>
           </div>
           
-          <h1 class="drop-down-title">Brand</h1>
-          <div id="brand-list" class="menu drop-down clearfix">
-            <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-            <div class="brand inactive rounded">${criteria}</div>
-            </script>
-          </div>
+          <div id="drop-downs">
+            <h1 class="drop-down-title">Brand</h1>
+            <div id="brand-list" class="menu drop-down clearfix">
+              <div class="close-button">close</div>
+              <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
+              <div class="brand inactive rounded">${criteria}</div>
+              </script>
+            </div>
           
-          <h1 class="drop-down-title">Price</h1>
-          <div class="menu drop-down clearfix">
-            <div class="container">
-              <div id="slider-price" class="clearfix"></div>
+            <h1 class="drop-down-title">Price</h1>
+            <div class="menu drop-down clearfix">
+              <div class="close-button">close</div>
+              <div class="container">
+                <div id="slider-price" class="clearfix"></div>
+              </div>
+            </div>
+
+            <h1 class="drop-down-title bottom">Ratings</h1>
+            <div id="star-list" class="menu drop-down bottom clearfix">
+              <div class="close-button">close</div>
+              <div class="container">
+                <div id="slider-star" class="clearfix"></div>
+              </div>
             </div>
           </div>
-
-          <h1 class="drop-down-title bottom">Ratings</h1>
-          <div id="star-list" class="menu drop-down bottom clearfix">
-            <div class="container">
-              <div id="slider-star" class="clearfix"></div>
+          
+          <h1 class="drop-down-title bottom">Features</h1>
+          <div class="menu drop-down bottom clearfix">
+            <div class="close-button">close</div>
+            <div id="traits-list" class="menu clearfix">
+              <div class="close-button">close</div>
+              <strong>Lifestyle Factors</strong><br/>
+              <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
+              <div class="trait inactive rounded">${criteria}</div>
+              </script>
+            </div>
+          
+            <div id="weights-list" class="menu clearfix">
+              <strong>Max Weight Capacity</strong> (child weight + tote storage)<br/>
+              <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
+              <div class="weight inactive rounded">${criteria}</div>
+              </script>
             </div>
           </div>
-          
-          <!--
-          <div id="traits-list" class="menu">
-            <h1>Traits</h1>
-            <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
-
-            <div class="trait inactive">${criteria}</div>
-            </script>
-          </div>
-          
-          <div id="weights-list" class="menu">
-            <h1>Weight Limits</h1>
-            <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
-            <div class="weight inactive">${criteria}</div>
-            </script>
-          </div>
-        -->
       </div> <!-- /list -->
     </div>
       
