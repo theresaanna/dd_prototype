@@ -9,8 +9,8 @@ Stroller.extend({
   // for rendering
   criteriaList: function(type) {
     var list = [];
+    
     Stroller.each(function(item) {
-      
       // if we've passed in an array object instead of a single
       // value for each Stroller instance, handle accordingly
       // also, needs a refactor. this is ugly.
@@ -28,15 +28,34 @@ Stroller.extend({
       // single version
       else {
         if ($.inArray(item[type], list) !== -1) {
-          
           return;
         }
         else {
-          list.push(item[type]);
+          if (type === "brand") {
+            var count = Stroller.brandCount(item[type]);
+            list.push({item: item[type], count: count});
+          }
+          else {
+            list.push(item[type]);
+          }
+          
         }
       }
     });
-    
     return list;
+  },
+  
+  brandCount: function(brand) {
+    var i = 0;
+    Stroller.each(function(stroller) {
+      if (stroller.brand === brand) {
+        i++;
+      }
+      else {
+        return;
+      }
+    });
+    return i;
   }
+  
 });

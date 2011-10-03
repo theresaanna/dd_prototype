@@ -74,7 +74,12 @@ var Menu = Spine.Controller.sub({
     var data = Stroller.criteriaList(type),
         list = ele;
     $.each(data, function(k, item) {
-      list.append($("#" + type + "-list-tmpl").tmpl({criteria: item}));
+      if (type === "brand") {
+        list.append($("#" + type + "-list-tmpl").tmpl({criteria: item.item, count: item.count}));
+      }
+      else {
+        list.append($("#" + type + "-list-tmpl").tmpl({criteria: item}));
+      }
     })
   }
     
