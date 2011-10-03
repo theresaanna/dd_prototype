@@ -1,6 +1,5 @@
 var Strollers = Spine.Controller.sub({
   events: {
-    "click .delete": "click",
     "click .category.active": "criteriaDeactivate",
     "click .category.inactive": "criteriaActivate",
     "click .brand.inactive": "criteriaActivate",
@@ -11,34 +10,20 @@ var Strollers = Spine.Controller.sub({
     "click .trait.active": "criteriaDeactivate",
     "click .weight.inactive": "criteriaActivate",
     "click .weight.active": "criteriaDeactivate",
-    "click .clear-link": "resetAll"
+    "click .clear-link": "resetAll",
+    "click .criteria": "breadcrumb"
   },
   
   elements: {
-    "#listings": "list"
+    ".breadcrumb": "optionsBreadcrumb"
   },
   
   init: function() {
     // this.item.bind("destroy", this.proxy(this.destroy));
     Stroller.bind("refresh change", this.counter);
     PurgatoryItem.bind("refresh change", this.counter);
-    Stroller.bind("destroy", this.remove);
     Stroller.bind("sliderchange", this.criteriaActivate);
     Stroller.bind("sliderremove", this.criteriaDeactivate);
-  },
-  
-  // render item list, soon to be removed/refactored
-  render: function() {
-    this.list.append($("#stroller-list").tmpl(this.item));
-  },
-  
-  // probably a better way to update the view when active listings change, refactor
-  remove: function(item) {
-    $(".listing").each(function() {
-      if ($(this).text() === item.name) {
-        $(this).remove();
-      }
-    })
   },
   
   // rerender the counter
@@ -54,11 +39,31 @@ var Strollers = Spine.Controller.sub({
     }
   },
   
+  // another refactor
+  breadcrumb: function() {
+    var criteria = $(event.target).data("type"),
+        value = $(event.target).data("value");
+    if ($("breadcrumb").children() !== []) {
+      $(".breadcrumb").children().each(function(i, ele) {
+        if ($(ele).data("val") === value) {
+          return;
+        }
+        else {
+          //var newel = this.optionsBreadcrumb.append($("#options-breadcrumb").tmpl({type: criteria, val: value}));
+          //$(newel).data({val: value});
+        }
+      });
+    }
+    else {
+      this.optionsBreadcrumb.append($("#options-breadcrumb").tmpl({type: criteria, val: value}));
+      //$(ele).data({val: value});
+    }
+  },
+    
   // reset all options when the clear link is clicked
   // super ghetto. should get merged with criteriaDeactivate. or the 
   // actual create/destroy loop should be abstracted. or something.
   resetAll: function(e) {
-    console.log(e);
     e.preventDefault();
     $(".active").each(function(i) {
       $(this).addClass("inactive").removeClass("active");
@@ -96,7 +101,10 @@ var Strollers = Spine.Controller.sub({
     if (criteria) {
       // toggle classes on the clicked element so that the appropriate event gets called
       $(event.target).addClass("active").removeClass("inactive");
-        
+      
+      Stroller.trigger("breadcrumb", {criteria: criteria, value: value});
+      
+                    
       // for each category on each instance of Stroller, ultimately return
       // if the clicked category is present on the instance or remove it from
       // Stroller and put it into a new instance of PurgatoryItem.

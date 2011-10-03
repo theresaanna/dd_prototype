@@ -52,7 +52,8 @@ a {
 }
 
 #list {
-  padding-top: 10px;
+  padding: 10px 10px 15px 10px;
+  
 }
 
 .inner {
@@ -60,7 +61,7 @@ a {
   clear: both;
 }
 
-.good-stuff {
+#good-stuff {
   background-color: #fff;
   border: 1px solid #c2c2c2;
   border-left: none;
@@ -69,6 +70,7 @@ a {
   float: left;
   padding: 5px 9px;
   margin-top: -4px;
+  width: 794px;
 }
 
 .main {
@@ -77,8 +79,14 @@ a {
 
 #menu {
   background: url(grey-diagonal-pattern.gif);
-  padding: 0 10px 15px 10px;
   border-bottom: 1px solid #dedddb;
+}
+
+.breadcrumb {
+  background-color: #f3f4eb;
+  border-top: 1px solid #dedddb;
+  padding: 3px 10px;
+  display: none;
 }
 
 .delete,
@@ -323,4 +331,10 @@ a {
   background: url(spritey-bits.png) no-repeat right -144px;
   float: right;
   cursor: pointer;
+}
+
+.listing {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }

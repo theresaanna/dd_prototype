@@ -16,6 +16,12 @@ var Menu = Spine.Controller.sub({
   },
 
   init: function() {
+    this.routes({
+      "/strollers": function() {
+        new Results({el: "#good-stuff", item: Stroller.all()});
+      }
+    });
+    
     // When a new Stroller instance is created, it runs the above "add" method
     Stroller.bind("create", this.proxy(this.add));
     Stroller.bind("setup", this.proxy(this.setup));
@@ -41,10 +47,7 @@ var Menu = Spine.Controller.sub({
   add: function(stroller) {
     // when we initialize the controller, we pass in a DOM element for it to bind to
     // as well as an object for it to be associated with in this.item
-    var s = new Strollers({el: "#list", item: stroller});
-    
-    // delegate to the Strollers controller render method
-    this.list.append(s.render());
+    var s = new Strollers({el: "#menu", item: stroller});
   },
   
   // after init runs and we populate the Stroller model instances,

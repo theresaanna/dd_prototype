@@ -8,9 +8,11 @@
     <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
     <script src="js/lib/jquery-ui-1.8.16.custom.min.js"></script>
     <script src="js/spine.js"></script>
+    <script src="js/lib/spine.route.js"></script>
     <script src="js/lib/spine.tmpl.js"></script>
     <script src="js/models/stroller.js"></script>
     <script src="js/models/purgatoryitem.js"></script>
+    <script src="js/controllers/results.js"></script>
     <script src="js/controllers/strollers.js"></script>
     <script src="js/controllers/menu.js"></script>
     <script>
@@ -71,6 +73,10 @@
   		  });
   		});
     });
+    
+    // after all magic has occurred, set up routes
+    Spine.Route.setup();
+    
     </script>
   </head>
   
@@ -78,29 +84,23 @@
     <div class="content">
       <img src="static/header.png"/>
       <div id="menu" class="clearfix">
-        <div id="list">
+        <div id="list" class="clearfix">
           
           <div id="control-panel" class="rounded">
             <div id="counter" class="serif"></div>
             <div id="controls">
-              <a href="#" id="go-button" class="serif rounded"><div class="arrow">Strollers</div></a>
+              <a href="#/strollers" id="go-button" class="serif rounded"><div class="arrow">Strollers</div></a>
               <a href="#" class="clear-link">Clear</a>
             </div>
           </div>
-          
-            <!-- ><div id="listings">
-              <script type="text/x-jquery-tmpl" id="stroller-list">
-                <div class="listing delete">${name}</div>
-              </script>
-            </div> -->
-          
+                    
           <div id="categories" class="menu">
-            <div class="category inactive rounded car-seat">Car Seat</div>
-            <div class="category inactive rounded double">Double</div>
-            <div class="category inactive rounded jogging">Jogging</div>
-            <div class="category inactive rounded full-featured">Full-Featured</div>
-            <div class="category inactive rounded umbrella">Umbrella</div>
-            <div class="category inactive rounded all-terrain">All-Terrain</div>
+            <div class="category inactive rounded car-seat criteria">Car Seat</div>
+            <div class="category inactive rounded double criteria">Double</div>
+            <div class="category inactive rounded jogging criteria">Jogging</div>
+            <div class="category inactive rounded full-featured criteria">Full-Featured</div>
+            <div class="category inactive rounded umbrella criteria">Umbrella</div>
+            <div class="category inactive rounded all-terrain criteria">All-Terrain</div>
           </div>
           
           <div id="drop-downs">
@@ -136,7 +136,7 @@
               <div class="close-button">close</div>
               <strong>Lifestyle Factors</strong><br/>
               <script type="text/x-jquery-tmpl" id="traits-list-tmpl">
-              <div class="trait inactive rounded">${criteria}</div>
+              <div class="trait inactive rounded criteria">${criteria}</div>
               </script>
             </div>
           
@@ -148,11 +148,25 @@
             </div>
           </div>
       </div> <!-- /list -->
+      
+      <div class="breadcrumb clearfix">
+        <script type="text/x-jquery-tmpl" id="options-breadcrumb">
+        ${type}: ${val}
+        </script>
+      </div>
+      
     </div>
       
       <div class="inner">
         <img src="static/content-header.png"/>
-        <div class="good-stuff">
+        <div id="good-stuff">
+          <script type="text/x-jquery-tmpl" id="stroller-list">
+            <div class="listing">
+              ${name}<br/>
+              ${brand}<br/>
+              ${price}
+            </div>
+          </script>
           <img src="static/main.png" class="main"/>
         </div>
         <img src="static/sidebar.png"/>
