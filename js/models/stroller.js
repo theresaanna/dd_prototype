@@ -31,14 +31,7 @@ Stroller.extend({
           return;
         }
         else {
-          if (type === "brand") {
-            var count = Stroller.brandCount(item[type]);
-            list.push({item: item[type], count: count});
-          }
-          else {
-            list.push(item[type]);
-          }
-          
+          list.push(item[type]);
         }
       }
     });

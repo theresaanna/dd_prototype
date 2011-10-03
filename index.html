@@ -12,7 +12,7 @@
     <script src="js/lib/spine.tmpl.js"></script>
     <script src="js/models/stroller.js"></script>
     <script src="js/models/purgatoryitem.js"></script>
-    <script src="js/controllers/results.js"></script>
+    <!-- <script src="js/controllers/results.js"></script> -->
     <script src="js/controllers/strollers.js"></script>
     <script src="js/controllers/menu.js"></script>
     <script>
@@ -58,6 +58,8 @@
       $(".close-button").click(function() {
         $("#menu .open").removeClass("open");
       });
+      
+      $(".clear-link").data({clear: "yes"});
       
       // if we click on another tab while one is open, ensure that the new one opens
       // and the other shuts
@@ -108,7 +110,7 @@
             <div id="brand-list" class="menu drop-down clearfix">
               <div class="close-button">close</div>
               <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-              <div class="brand inactive rounded">${criteria} (${count})</div>
+              <div class="brand inactive rounded">${criteria}</div>
               </script>
             </div>
           
@@ -150,8 +152,9 @@
       </div> <!-- /list -->
       
       <div class="breadcrumb clearfix">
+        <a href="#" class="clear-link back-link">Back to Full-Featured Strollers</a>
         <script type="text/x-jquery-tmpl" id="options-breadcrumb">
-        ${type}: ${val}
+        <span class="breadcrumb-item">${type}: ${value}<span class="close-button-breadcrumb">Close</span></span>
         </script>
       </div>
       

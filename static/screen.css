@@ -4,6 +4,7 @@ body {
   font-family: Arial,Helvetica,sans-serif;
   background: url(bg-body.gif) repeat left top;
   font-size: 80%;
+  color: #666;
 }
 
 h1 {
@@ -13,7 +14,7 @@ h1 {
 
 a {
   text-decoration: none;
-  color: #444444;
+  color: #333;
 }
 
 .clearfix:after {
@@ -324,7 +325,8 @@ a {
   float: left;
 }
 
-.close-button {
+.close-button,
+.close-button-breadcrumb {
   text-indent: -9999px;
   width: 20px;
   height: 14px;
@@ -333,8 +335,32 @@ a {
   cursor: pointer;
 }
 
+.close-button-breadcrumb {
+  background: url(spritey-bits.png) no-repeat right -186px;
+}
+
 .listing {
   border-bottom: 1px solid #000;
   margin-bottom: 10px;
   padding-bottom: 10px;
+}
+
+.breadcrumb-item {
+  text-transform: capitalize;
+  margin-left: 15px;
+  float: left;
+}
+
+.back-link {
+  padding: 0 15px;
+  background: url(spritey-bits.png) no-repeat 3px 4px;
+  display: inline-block;
+  float: left;
+  height: auto;
+  font-size: 1em;
+  border-right: 1px dotted #d6d6d4;
+}
+
+.back-link.text-hide {
+  text-indent: 0;
 }

@@ -11,11 +11,7 @@ var Strollers = Spine.Controller.sub({
     "click .weight.inactive": "criteriaActivate",
     "click .weight.active": "criteriaDeactivate",
     "click .clear-link": "resetAll",
-    "click .criteria": "breadcrumb"
-  },
-  
-  elements: {
-    ".breadcrumb": "optionsBreadcrumb"
+    "click .close-button-breadcrumb": "criteriaDeactivate"
   },
   
   init: function() {
@@ -38,27 +34,6 @@ var Strollers = Spine.Controller.sub({
       $(".clear-link").removeClass("text-hide");
     }
   },
-  
-  // another refactor
-  breadcrumb: function() {
-    var criteria = $(event.target).data("type"),
-        value = $(event.target).data("value");
-    if ($("breadcrumb").children() !== []) {
-      $(".breadcrumb").children().each(function(i, ele) {
-        if ($(ele).data("val") === value) {
-          return;
-        }
-        else {
-          //var newel = this.optionsBreadcrumb.append($("#options-breadcrumb").tmpl({type: criteria, val: value}));
-          //$(newel).data({val: value});
-        }
-      });
-    }
-    else {
-      this.optionsBreadcrumb.append($("#options-breadcrumb").tmpl({type: criteria, val: value}));
-      //$(ele).data({val: value});
-    }
-  },
     
   // reset all options when the clear link is clicked
   // super ghetto. should get merged with criteriaDeactivate. or the 
@@ -68,6 +43,8 @@ var Strollers = Spine.Controller.sub({
     $(".active").each(function(i) {
       $(this).addClass("inactive").removeClass("active");
     });
+    $(".breadcrumb").removeClass("open");
+    Stroller.trigger("reset");
     PurgatoryItem.each(function(record) {
       Stroller.create({
         name: record.name,
@@ -179,8 +156,21 @@ var Strollers = Spine.Controller.sub({
   
   criteriaDeactivate: function() {
     //only execute if we've clicked on a valid criteria input
-    if ($(event.target).data("type")) {
+    if ($(event.target).data("type") || $(event.target).data("clear")) {
     
+      // if a matched breadcrumb link close button was clicked
+      if ($(event.target).data("clear")) {
+        // remove this breadcrumb item
+        Stroller.trigger("reset");
+        
+        // make inactive associated main menu item
+        $(".active").each(function(i, item) {
+          if ($(this).data("value")) {
+            console.log(this)
+            $(this).addClass("inactive").removeClass("active");
+          }
+        })
+      }
       // toggle classes on the clicked element so that the appropriate event gets called
       $(event.target).addClass("inactive").removeClass("active");
 
@@ -189,7 +179,7 @@ var Strollers = Spine.Controller.sub({
       PurgatoryItem.each(function(record) {
         var criteria = $(event.target).data("value");
 
-        // when we are resetting the price, the value won't and shouldn't match
+        // when we are resetting the price or star, the value won't and shouldn't match
         if (record.removed === criteria || $(event.target).data("type") === "price" || $(event.target).data("type") === "star") {
           Stroller.create({
             name: record.name,

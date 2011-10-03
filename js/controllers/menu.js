@@ -7,24 +7,30 @@ jQuery(function($) {
 
 // Menu is subclass of the Spine controller as a parent controller for our app
 var Menu = Spine.Controller.sub({
+  events: {
+    "click .criteria": "breadcrumb",
+    "click #go-button": "breadcrumbMenu"
+  },
   
   elements: {
     ".listing": "list",
     "#brand-list": "brandList",
     "#traits-list": "traitsList",
-    "#weights-list": "weightList"
+    "#weights-list": "weightList",
+    ".breadcrumb": "optionsBreadcrumb"
   },
 
   init: function() {
-    this.routes({
-      "/strollers": function() {
-        new Results({el: "#good-stuff", item: Stroller.all()});
-      }
-    });
+    //this.routes({
+    //  "/strollers": function() {
+    //    new Results({el: "#good-stuff", item: Stroller.all()});
+    //  }
+    //});
     
     // When a new Stroller instance is created, it runs the above "add" method
     Stroller.bind("create", this.proxy(this.add));
     Stroller.bind("setup", this.proxy(this.setup));
+    Stroller.bind("reset", this.breadcrumb);
     
     // grab JSON and create a new Stroller for each result
     $.getJSON('feed.json', function(data) {
@@ -77,13 +83,38 @@ var Menu = Spine.Controller.sub({
     var data = Stroller.criteriaList(type),
         list = ele;
     $.each(data, function(k, item) {
-      if (type === "brand") {
-        list.append($("#" + type + "-list-tmpl").tmpl({criteria: item.item, count: item.count}));
-      }
-      else {
         list.append($("#" + type + "-list-tmpl").tmpl({criteria: item}));
-      }
     })
-  }
+  },
+  
+  // updates the breadcrumb menu shown on results pages
+  // as options are selected/deselected
+  breadcrumb: function() {
+    var origin = $(event.target),
+        breadcrumbMenu = this.optionsBreadcrumb;
+        
+    // if an active menu item or clear link is clicked, check to see what
+    // breadcrumb item should be removed or remove all if its a clear link
+    if ($(origin).hasClass('active') || origin.data("clear")) {
+      $(".breadcrumb-item").each(function(b, c) {
+        if ($(c).data("value") === origin.data("value") || origin.data("clear")) {
+          $(c).remove();
+        }
+      })
+    }
     
+    // if a new criteria has been activated
+    // add a matching breadcrumb item
+    else if ($(origin).hasClass('inactive')) {
+      var criteria = origin.data(),
+          ele = $("#options-breadcrumb").tmpl({type: criteria.type, value: criteria.value});
+      breadcrumbMenu.append(ele);
+      $(".breadcrumb-item").last().data({type: criteria.type, value: criteria.value});
+      $(".close-button-breadcrumb").data({clear: "yes"});
+    }
+  },
+  
+  breadcrumbMenu: function() {
+    $(this.optionsBreadcrumb).addClass("open");
+  }
 });  
