@@ -116,5 +116,6 @@ var Menu = Spine.Controller.sub({
   
   breadcrumbMenu: function() {
     $(this.optionsBreadcrumb).addClass("open");
+    $(".inner").html('<img src="static/results-page.png"/>');
   }
 });  
