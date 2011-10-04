@@ -61,10 +61,6 @@
   		});
   		$("#slider-star .ui-slider-handle").text("1");
       
-      $(".close-button").click(function() {
-        $("#menu .open").removeClass("open");
-      });
-      
       $(".clear-link, .close-button-breadcrumb").data({clear: "yes"});
       
       // if we click on another tab while one is open, ensure that the new one opens
@@ -119,15 +115,13 @@
               <div id="drop-downs" class="clearfix">
                 <h1 class="drop-down-title serif brandhead open">Brand</h1>
                 <div id="brand-list" class="menu drop-down open clearfix">
-                  <div class="close-button">close</div>
                   <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
-                  <div class="brand inactive rounded">${value}</div>${count}
+                  <div class="brand inactive">${value}</div>${count}
                   </script>
                 </div>
 
                 <h1 class="drop-down-title serif">Price</h1>
                 <div class="menu drop-down clearfix">
-                  <div class="close-button">close</div>
                   <div class="container">
                     <div id="slider-price" class="clearfix"></div>
                   </div>
@@ -135,7 +129,6 @@
 
                 <h1 class="drop-down-title serif">Ratings</h1>
                 <div id="star-list" class="menu drop-down clearfix">
-                  <div class="close-button">close</div>
                   <div class="container">
                     <div class="slider">
                       <span class="note">lowest<br/>rated</span>
@@ -152,18 +145,17 @@
 
               <h1 class="drop-down-title serif featureshead">Features</h1>
               <div class="menu drop-down clearfix">
-                <div class="close-button">close</div>
                 <div id="trait-list" class="menu clearfix">
-                  <strong>Lifestyle Factors</strong><br/>
+                  <strong class="serif">Lifestyle Factors</strong><br/>
                   <script type="text/x-jquery-tmpl" id="trait-list-tmpl">
-                  <div class="trait inactive rounded criteria">${value}</div>
+                  <div class="trait inactive criteria">${value}</div>
                   </script>
                 </div>
 
                 <div id="weights-list" class="menu clearfix">
-                  <strong>Max Weight Capacity</strong> (child weight + tote storage)<br/>
+                  <strong class="serif">Max Weight Capacity</strong><br/> <em>(child weight + tote storage)</em><br/>
                   <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
-                  <div class="weight inactive rounded">${value}</div>
+                  <div class="weight inactive">${value}</div>
                   </script>
                 </div>
               </div>

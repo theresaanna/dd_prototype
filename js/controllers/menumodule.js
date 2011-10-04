@@ -132,6 +132,7 @@ var Menu = Spine.Controller.sub({
       if (type === "brand") {
         var count = MenuItem.findAllByAttribute(ind.criteria).length;
         ele.append($(markup).data({type: ind.criteria, value: ind.value, count: count}));
+        $(markup).children().data({type: ind.criteria, value: ind.value, count: count})
       }
       else {
        ele.append($(markup).data({type: ind.criteria, value: ind.value})); 
@@ -187,7 +188,6 @@ var Menu = Spine.Controller.sub({
       });
       record.destroy();
     });
-    $(".inner").html('<img src="static/content-header.png"/><img src="static/main.png" class="main"/><img src="static/sidebar.png"/>');
   },
   
   // fake little results page creator

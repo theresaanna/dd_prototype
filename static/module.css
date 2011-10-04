@@ -35,10 +35,7 @@ a {
   font-weight: bold;
 }
 
-.menu .active {
-  background-image: -webkit-linear-gradient(#accf55, #85a041);
-  font-weight: bold;
-}
+
 
 .serif {
   font-family: Georgia, serif;
@@ -336,19 +333,10 @@ a {
   border-bottom: 1px solid #e4e4e3;
 }
 
-.brand,
-.trait, 
-.weight {
-  float: left;
-  padding: 7px;
-  margin-right: 15px;
-}
-
 #trait-list,
 #weights-list {
-  width: 30%;
+  width: 40%;
   padding-right: 20px;
-  border-right: 1px dotted #d7d8d7;
   margin-right: 20px;
   float: left;
 }
@@ -403,7 +391,7 @@ a {
 
 .slider {
   float: left;
-  width: 60%;
+  width: 80%;
 }
 
 .slider-holder {
@@ -440,4 +428,56 @@ h1.top {
 h2 {
   font-size: 1.2em;
   margin-bottom: 5px;
+}
+
+.brand,
+.trait,
+.weight {
+  margin: 8px 0;
+  position: relative;
+  padding-left: 22px;
+  z-index: 2;
+}
+
+.brand:after, 
+.brand:before,
+.trait:after,
+.trait:before,
+.weight:after,
+.weight:before {
+  content: '';
+  width: 12px;
+  height: 14px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  border-radius: 4px;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 0.9em;
+  padding-left: 2px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+}
+
+.brand.active:after,
+.trait.active:after,
+.weight.active:after {
+  background: url(module-sprites.png) no-repeat -787px -172px;
+}
+
+.menu .active {
+  font-weight: bold;
+}
+
+.menu .active.brand:before,
+.menu .active.trait:before,
+.menu .active.weight:before {
+  background-image: -webkit-linear-gradient(#accf55, #85a041);
+}
+
+#weights-list em {
+  font-size: .8em;
 }
