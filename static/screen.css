@@ -35,7 +35,7 @@ a {
   font-weight: bold;
 }
 
-.active {
+.menu .active {
   background-image: -webkit-linear-gradient(#accf55, #85a041);
   font-weight: bold;
   color: #fff;
@@ -189,27 +189,27 @@ a {
 }
 
 /* sprite positioning for stroller images */
-.car-seat {
+.Car.Seat {
   background-position: 27px -77px;
 }
 
-.double {
+.Double {
   background-position: -35px -77px;
 }
 
-.jogging {
+.Jogging {
   background-position: -108px -77px;
 }
 
-.full-featured {
+.Full-Featured {
   background-position: -177px -77px;
 }
 
-.umbrella {
+.Umbrella {
   background-position: -244px -77px;
 }
 
-.all-terrain {
+.All-Terrain {
   background-position: -311px -77px;
 }
 
@@ -228,30 +228,32 @@ a {
 .category.active {
   background-position: 0 0;
   background-image: -webkit-linear-gradient(#accf55, #85a041);
+  color: #fff;
+  font-weight: bold;
 }
 
 /* active images for stroller sprites */
-.car-seat.active:after {
+.Car.Seat.active:after {
   background-position: 27px 5px;
 }
 
-.double.active:after {
+.Double.active:after {
   background-position: -35px 5px;
 }
 
-.jogging.active:after {
+.Jogging.active:after {
   background-position: -108px 5px;
 }
 
-.full-featured.active:after {
+.Full-Featured.active:after {
   background-position: -177px 5px;
 }
 
-.umbrella.active:after {
+.Umbrella.active:after {
   background-position: -244px 5px;
 }
 
-.all-terrain.active:after {
+.All-Terrain.active:after {
   background-position: -311px 5px;
 }
 
@@ -316,7 +318,7 @@ a {
   margin-right: 15px;
 }
 
-#traits-list,
+#trait-list,
 #weights-list {
   width: 30%;
   padding-right: 20px;
@@ -351,6 +353,14 @@ a {
   float: left;
 }
 
+.breadcrumb-item.inactive {
+  display: none;
+}
+
+.breadcrumb-item.active {
+  display: inline;
+}
+
 .back-link {
   padding: 0 15px;
   background: url(spritey-bits.png) no-repeat 3px 4px;
@@ -363,4 +373,32 @@ a {
 
 .back-link.text-hide {
   text-indent: 0;
+}
+
+.slider {
+  float: left;
+  width: 60%;
+}
+
+.slider-holder {
+  position: relative;
+  width: 350px;
+  height: 10px;
+  float: left;
+  margin: 0 10px;
+}
+
+.note {
+  font-size: .8em;
+  float: left;
+  display: block;
+}
+
+.selected {
+  border: 2px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 8px 0 0 8px;
+  margin-top: -6px;
+  float: left;
+  font-size: 1.2em;
 }

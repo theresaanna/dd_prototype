@@ -1,13 +1,13 @@
 {
   "stroller": {
     "name": "Baby Jogger City Elite",
-    "categories": [
+    "category": [
       "Jogging"
     ],
     "brand": "Baby Jogger",
     "price": "399.99",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "urban",
       "active"
     ],
@@ -19,13 +19,13 @@
   },
   "stroller2": {
     "name": "Baby Jogger City Mini",
-    "categories": [
+    "category": [
       "Jogging"
     ],
     "brand": "Baby Jogger",
     "price": "239.99",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "urban",
       "active"
     ],
@@ -37,7 +37,7 @@
   },
   "stroller3": {
     "name": "Baby Jogger Summit XC Triple",
-    "categories": [
+    "category": [
       "Jogging",
       "Full-Featured",
       "All-Terrain"
@@ -45,7 +45,7 @@
     "brand": "Baby Jogger",
     "price": "239.99",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "rural",
       "active",
       "suburban"
@@ -59,7 +59,7 @@
   },
   "stroller4": {
     "name": "Mountain Buggy Swift",
-    "categories": [
+    "category": [
       "Jogging",
       "Full-Featured",
       "All-Terrain",
@@ -70,7 +70,7 @@
     "brand": "Mountain Buggy",
     "price": "449.99",
     "stars": "1 - 2.5 years",
-    "traits": [
+    "trait": [
       "rural",
       "active",
       "suburban",
@@ -86,14 +86,14 @@
   },
   "stroller5": {
     "name": "Mountain Buggy Urban Double",
-    "categories": [
+    "category": [
       "All-Terrain",
       "Double"
     ],
     "brand": "Mountain Buggy",
     "price": "749.00",
     "stars": "5",
-    "traits": [
+    "trait": [
       "rural",
       "active",
       "suburban",
@@ -109,7 +109,7 @@
   },
   "stroller6": {
     "name": "Graco MetroLite",
-    "categories": [
+    "category": [
       "Full-Featured",
       "All-Terrain",
       "Car Seat"
@@ -117,7 +117,7 @@
     "brand": "Graco",
     "price": "149.99",
     "stars": "5",
-    "traits": [
+    "trait": [
       "active",
       "urban"
     ],
@@ -129,7 +129,7 @@
   },
   "stroller7": {
     "name": "Graco Quattro Tour",
-    "categories": [
+    "category": [
       "Full-Featured",
       "All-Terrain",
       "Umbrella",
@@ -138,7 +138,7 @@
     "brand": "Graco",
     "price": "147.00",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "rural",
       "active",
       "suburban",
@@ -153,14 +153,14 @@
   },
   "stroller8": {
     "name": "Graco SnugRider",
-    "categories": [
+    "category": [
       "Umbrella",
       "Car Seat"
     ],
     "brand": "Graco",
     "price": "449.99",
     "stars": "6 months - 1 year",
-    "traits": [
+    "trait": [
       "suburban",
       "urban"
     ],
@@ -172,7 +172,7 @@
   },
   "stroller9": {
     "name": "Graco DuoGlider",
-    "categories": [
+    "category": [
       "Full-Featured",
       "Umbrella",
       "Car Seat",
@@ -181,7 +181,7 @@
     "brand": "Graco",
     "price": "149.99",
     "stars": "5",
-    "traits": [
+    "trait": [
       "suburban",
       "urban"
     ],
@@ -193,14 +193,15 @@
   },
   "stroller10": {
     "name": "Maclaren Grand Tour LX",
-    "categories": [
+    "category": [
       "Full-Featured",
       "All-Terrain"
     ],
     "brand": "Maclaren",
     "price": "700.00",
-    "stars": "2.5 years and over",
-    "traits": [
+    "stars": "4",
+    "weight": "2.5 years and over",
+    "trait": [
       "rural",
       "suburban",
       "urban"
@@ -215,7 +216,7 @@
   },
   "stroller11": {
     "name": "Maclaren Twin Triumph",
-    "categories": [
+    "category": [
       "Full-Featured",
       "All-Terrain",
       "Umbrella",
@@ -223,8 +224,9 @@
     ],
     "brand": "Maclaren",
     "price": "264.99",
-    "stars": "0-6 months",
-    "traits": [
+    "stars": "5",
+    "weight": "0-6 months",
+    "trait": [
       "suburban",
       "urban"
     ],
@@ -236,14 +238,14 @@
   },
   "stroller12": {
     "name": "Maclaren Easy Traveller",
-    "categories": [
+    "category": [
       "Umbrella",
       "Car Seat"
     ],
     "brand": "Maclaren",
     "price": "84.88",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "suburban",
       "urban"
     ],
@@ -256,14 +258,14 @@
   },
   "stroller13": {
     "name": "Bugaboo Donkey",
-    "categories": [
+    "category": [
       "Full-Featured",
       "Double"
     ],
     "brand": "Bugaboo",
     "price": "1000.00",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "active",
       "suburban",
       "urban"
@@ -278,7 +280,7 @@
   },
   "stroller14": {
     "name": "Bugaboo Bee",
-    "categories": [
+    "category": [
       "Full-Featured",
       "Umbrella",
       "Car Seat"
@@ -286,7 +288,7 @@
     "brand": "Bugaboo",
     "price": "649.00",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "active",
       "urban"
     ],
@@ -299,7 +301,7 @@
   },
   "stroller15": {
     "name": "UPPAbaby Vista",
-    "categories": [
+    "category": [
       "Full-Featured",
       "Car Seat",
       "Double"
@@ -307,7 +309,7 @@
     "brand": "UPPAbaby",
     "price": "679.99",
     "stars": "5",
-    "traits": [
+    "trait": [
       "active",
       "suburban",
       "urban"
@@ -322,13 +324,13 @@
   },
   "stroller16": {
     "name": "Bumbleride Indie",
-    "categories": [
+    "category": [
       "Jogging"
     ],
     "brand": "Bumbleride",
     "price": "599.00",
     "stars": "6 months - 1 year",
-    "traits": [
+    "trait": [
       "active",
       "urban"
     ],
@@ -340,7 +342,7 @@
   },
   "stroller17": {
     "name": "Kolcraft Contours Options 3-Wheeler Stroller",
-    "categories": [
+    "category": [
       "Jogging",
       "Full-Featured",
       "All-Terrain"
@@ -348,7 +350,7 @@
     "brand": "Kolcraft",
     "price": "163.13",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "active",
       "suburban",
       "urban"
@@ -362,7 +364,7 @@
   },
   "stroller18": {
     "name": "Peg-Perego Centro Completo",
-    "categories": [
+    "category": [
       "Full-Featured",
       "All-Terrain",
       "Car Seat"
@@ -370,7 +372,7 @@
     "brand": "Peg-Perego",
     "price": "300.00",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "rural",
       "suburban",
       "urban"
@@ -385,14 +387,14 @@
   },
   "stroller19": {
     "name": "Baby Trend Freestyle",
-    "categories": [
+    "category": [
       "Full-Featured",
       "Umbrella"
     ],
     "brand": "Baby Trend",
     "price": "135.00",
     "stars": "2.5 years and over",
-    "traits": [
+    "trait": [
       "rural",
       "suburban",
       "urban"
@@ -404,7 +406,7 @@
   },
   "stroller20": {
     "name": "Inglesina Twin Swift",
-    "categories": [
+    "category": [
       "Umbrella",
       "Car Seat",
       "Double"
@@ -412,7 +414,7 @@
     "brand": "Inglesina",
     "price": "250.00",
     "stars": "1 - 2.5 years",
-    "traits": [
+    "trait": [
       "rural",
       "suburban"
     ],
