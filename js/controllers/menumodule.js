@@ -207,22 +207,6 @@ var Menu = Spine.Controller.sub({
     })
   },
   
-  // hide breadcrumb items when the criteria
-  // is deactivated
-  breadcrumbDeactivate: function(data) {
-    $(".breadcrumb-item").each(function(i, b) {
-      if ($(b).data("value") === data) {
-        $(this).removeClass('active').addClass('inactive');
-      }
-    });
-    
-    // if there are no active breadcrumb criteria
-    // hide the menu and reset the body
-    if ($(".breadcrumb .active").length === 0) {
-      $(".breadcrumb").removeClass("open");
-      $(".inner").html('<img src="static/content-header.png"/><img src="static/main.png" class="main"/><img src="static/sidebar.png"/>');
-    }
-  },
   
   // the primary logic that decides, when any criteria is clicked, what Stroller instances
   // will remain active and which will go into purgatory
@@ -343,8 +327,6 @@ var Menu = Spine.Controller.sub({
         // toggle classes on the clicked element so that the appropriate event gets called
         $(event.target).addClass("inactive").removeClass("active");
       }
-      // update breadcrumb menu
-      MenuItem.trigger("breadcrumbdeactivate", value);
 
       // for each instance of PurgatoryItem that once again meets the active criteria,
       // create a Stroller instance and remove its PurgatoryItem instance
@@ -367,4 +349,4 @@ var Menu = Spine.Controller.sub({
       });
     }
   }
-});  
+});

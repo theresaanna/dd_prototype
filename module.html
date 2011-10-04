@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+  <head>
+    <title>ConsumerSearch.com | Strollers</title>
+    
+    <link rel="stylesheet" href="static/module.css"/>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="js/lib/jquery-ui-1.8.16.custom.min.js"></script>
+    <script src="js/spine.js"></script>
+    <script src="js/lib/spine.route.js"></script>
+    <script src="js/lib/spine.tmpl.js"></script>
+    <script src="js/models/stroller.js"></script>
+    <script src="js/models/purgatoryitem.js"></script>
+    <script src="js/models/menuitem.js"></script>
+    <!-- <script src="js/controllers/results.js"></script> -->
+    <script src="js/controllers/menumodule.js"></script>
+    <script>
+    
+    // the slider functionality is rough at the moment and certainly not fool proof
+    // it works well enough for testing, however, can shore up functionality later
+    // this is very ugly at the moment. avert your eyes.
+    // jQuery wastelaaaaand
+    $(document).ready(function() {
+      $("#slider-price").slider({ animate:true, 
+                            range: true,
+                            min: 0, 
+                            max: 1000,
+                            step: 50,
+                            values: [0, 1000],
+                            slide: function(event, ui) {
+  			                            $(this).find(".ui-slider-handle").first().text("$" + ui.values[0]);
+  			                            $(this).find(".ui-slider-handle").last().text("$" + ui.values[1]);
+  			                            $(this).data({type: "price", values: [ui.values[0], ui.values[1]]});
+  			                            $(this).parent().data({type: "price", values: [ui.values[0], ui.values[1]]});
+  			                            MenuItem.trigger("sliderremove");
+  			                            MenuItem.trigger("sliderchange");
+  			                    }
+  		});
+  		$("#slider-price .ui-slider-handle").first().text("$0");
+      $("#slider-price .ui-slider-handle").last().text("$1000");
+
+      $("#slider-star").slider({ animate:true, 
+                            min: 1, 
+                            max: 5,
+                            step: 1,
+                            value: 1,
+                            slide: function(event, ui) {
+  			                            $(this).find(".ui-slider-handle").text(ui.value);
+  			                            $(this).data({type: "star", value: ui.value});
+  			                            $(this).parent().data({type: "star", value: ui.value});
+  			                            MenuItem.trigger("sliderremove");
+  			                            MenuItem.trigger("sliderchange");
+  			                            if (ui.value === 5) {
+  			                              $(".selected").text(ui.value + " stars");
+  			                            }
+  			                            else {
+  			                              $(".selected").text(ui.value + "-star and up");
+  			                            }
+  			                    }
+  		});
+  		$("#slider-star .ui-slider-handle").text("1");
+      
+      $(".close-button").click(function() {
+        $("#menu .open").removeClass("open");
+      });
+      
+      $(".clear-link, .close-button-breadcrumb").data({clear: "yes"});
+      
+      // if we click on another tab while one is open, ensure that the new one opens
+      // and the other shuts
+  		$(".drop-down-title").click(function(title) {
+  		  $(this).toggleClass('open').next().toggleClass('open');
+  		  $(".drop-down-title.open").each(function(i) {
+  		    if (this === event.target) {
+  		      return;
+  		    }
+  		    else {
+  		      $(this).toggleClass('open').next().toggleClass('open');
+  		    }
+  		  });
+  		});
+    });
+    
+    // after all magic has occurred, set up routes
+    //Spine.Route.setup();
+    
+    </script>
+  </head>
+  
+  <body>
+    <div class="content">
+      <img src="static/header.png"/>
+      
+      <div class="breadcrumb clearfix">
+        <a href="#" class="clear-link back-link">Back to Full-Featured Strollers</a>
+        <script type="text/x-jquery-tmpl" id="options-breadcrumb">
+        <span class="breadcrumb-item inactive">${type}: ${value}<span class="close-button-breadcrumb">Close</span></span>
+        </script>
+      </div>
+      
+      
+      <div class="inner">
+        
+          <img src="static/content-header.png"/>
+          <img src="static/sidebar.png" style="float:right"/>
+          
+          <img src="static/main.png" class="main"/>
+          <div id="menu" class="clearfix">
+            <div id="list" class="clearfix">
+              <h1 class="top serif">Find a stroller</h1>
+              <div id="control-panel" class="rounded clearfix">
+                <div id="counter" class="serif"></div>
+                <div id="controls">
+                  <a href="#/strollers" id="go-button" class="serif rounded"><div class="arrow">Results</div></a>
+                  <a href="#" class="clear-link inactive">Clear</a>
+                </div>
+              </div>
+              <h2 class="serif">Best Strollers (by type)</h2>
+              <div id="categories" class="menu">
+                <script type="text/x-jquery-tmpl" id="category-list-tmpl">
+                <div class="category inactive rounded criteria ${value}"><span>${value}</span></div>
+                </script>
+              </div>
+
+              <div id="drop-downs" class="clearfix">
+                <h1 class="drop-down-title brandhead">Brand</h1>
+                <div id="brand-list" class="menu drop-down clearfix">
+                  <div class="close-button">close</div>
+                  <script type="text/x-jquery-tmpl" id="brand-list-tmpl">
+                  <div class="brand inactive rounded">${value}</div>${count}
+                  </script>
+                </div>
+
+                <h1 class="drop-down-title">Price</h1>
+                <div class="menu drop-down clearfix">
+                  <div class="close-button">close</div>
+                  <div class="container">
+                    <div id="slider-price" class="clearfix"></div>
+                  </div>
+                </div>
+
+                <h1 class="drop-down-title">Ratings</h1>
+                <div id="star-list" class="menu drop-down clearfix">
+                  <div class="close-button">close</div>
+                  <div class="container">
+                    <div class="slider">
+                      <span class="note">lowest<br/>rated</span>
+                      <div class="slider-holder">
+                        <div id="slider-star" class="clearfix"></div>
+                      </div>
+                      <span class="note">highest<br/>rated</span>
+                    </div>
+                    <div class="selected">
+                      1-star and up
+                    </div>
+                  </div>
+                </div>
+
+              <h1 class="drop-down-title featureshead">Features</h1>
+              <div class="menu drop-down clearfix">
+                <div class="close-button">close</div>
+                <div id="trait-list" class="menu clearfix">
+                  <strong>Lifestyle Factors</strong><br/>
+                  <script type="text/x-jquery-tmpl" id="trait-list-tmpl">
+                  <div class="trait inactive rounded criteria">${value}</div>
+                  </script>
+                </div>
+
+                <div id="weights-list" class="menu clearfix">
+                  <strong>Max Weight Capacity</strong> (child weight + tote storage)<br/>
+                  <script type="text/x-jquery-tmpl" id="weight-list-tmpl">
+                  <div class="weight inactive rounded">${value}</div>
+                  </script>
+                </div>
+              </div>
+            </div>
+          </div> <!-- /list -->
+        
+      </div> <!-- /inner -->
+      
+      <img src="static/footer.png"/>
+    </div>
+  </body>
+</html>

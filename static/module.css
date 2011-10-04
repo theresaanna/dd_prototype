@@ -1,0 +1,436 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  background: url(bg-body.gif) repeat left top;
+  font-size: 80%;
+  color: #666;
+}
+
+h1 {
+  margin: 0 0 3px 0;
+  font-size: 1em;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.rounded {
+  border: 1px solid #e4e4e3;
+  border-radius: 8px;
+}
+
+.menu .rounded:hover {
+  border-color: #85a041;
+  font-weight: bold;
+}
+
+.menu .active {
+  background-image: -webkit-linear-gradient(#accf55, #85a041);
+  font-weight: bold;
+}
+
+.serif {
+  font-family: Georgia, serif;
+}
+
+.content {
+  background-color: #fff;
+  width: 990px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#list {
+  padding: 10px 10px 15px 10px;
+  
+}
+
+.inner {
+  background-color: #f8f7f3;
+  clear: both;
+}
+
+#good-stuff {
+  background-color: #fff;
+  border: 1px solid #c2c2c2;
+  border-left: none;
+  -webkit-border-radius: 0 8px 8px 0;
+  border-radius: 0 8px 8px 0;
+  float: left;
+  padding: 5px 9px;
+  margin-top: -4px;
+  width: 794px;
+}
+
+.main {
+  vertical-align: top;
+}
+
+#menu {
+  background: url(grey-diagonal-pattern.gif);
+  border-bottom: 1px solid #dedddb;
+  width: 762px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
+}
+
+#categories {
+  min-height: 50px;
+}
+
+.breadcrumb {
+  background-color: #f3f4eb;
+  border-top: 1px solid #dedddb;
+  padding: 3px 10px;
+  display: none;
+}
+
+.delete,
+.category,
+.brand,
+.star,
+.trait,
+.weight {
+  cursor: pointer;
+  margin: 3px 0;
+}
+
+.container {
+  position: relative;
+  min-height: 50px;
+  margin-top: 30px;
+}
+
+.container.active {
+  background: #fff;
+}
+
+.ui-slider-horizontal {
+  position: absolute;
+  width: 350px;
+  height: 10px;
+  background-image: -webkit-linear-gradient(#accf55, #85a041);
+}
+
+.ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  height: 47px;
+  width: 15px;
+  background: url(spritey-bits.png) no-repeat left -84px;
+  margin-top: -28px;
+  font-weight: bold;
+}
+
+#control-panel {
+  background-image: -webkit-linear-gradient(left, #f5eedc, #fcf9f3, #f5eedc);
+  padding: 5px 15px;
+  float: left;
+  margin-right: 20px;
+  border-color: transparent;
+  text-align: center;
+}
+
+#counter {
+  color: #7e1f3f;
+  font-size: 3em;
+  text-align: center;
+}
+
+#controls {
+  float: left;
+}
+
+#go-button {
+  display: inline-block;
+  background-image: -webkit-linear-gradient(#7f102c, #6a0d25);
+  color: #fff;
+  padding: 3px 8px;
+  font-weight: bold;
+}
+
+.arrow {
+  background: url(spritey-bits.png) no-repeat right -10px;
+  padding-right: 16px;
+}
+
+.clear-link {
+  font-size: .8em;
+  text-align: center;
+  display: block;
+  float: left;
+  height: 13px;
+}
+
+.text-hide {
+  text-indent: -9999px;
+}
+
+/* stroller menu items */
+.category {
+  float: left;
+  font-size: .8em;
+  background: #fff url(sprites-strollers.png) no-repeat;
+  padding: 35px 5px 5px 5px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin: 0 5px 0 0;
+  width: 65px;
+  position: relative;
+}
+
+.category span {
+  position: absolute;
+  top: 50px;
+}
+
+/* sprite positioning for stroller images */
+.Car.Seat {
+  background-position: 27px -77px;
+}
+
+.Double {
+  background-position: -35px -77px;
+}
+
+.Jogging {
+  background-position: -108px -77px;
+}
+
+.Full-Featured {
+  background-position: -177px -77px;
+}
+
+.Umbrella {
+  background-position: -244px -77px;
+}
+
+.All-Terrain {
+  background-position: -311px -77px;
+}
+
+.category.active:after {
+  border-radius: 12px;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  content: "";
+  background: url(sprites-strollers.png) no-repeat;
+}
+
+.category.active {
+  background-position: 0 0;
+  background-image: -webkit-linear-gradient(#accf55, #85a041);
+  font-weight: bold;
+}
+
+/* active images for stroller sprites */
+.Car.Seat.active:after {
+  background-position: 27px 5px;
+}
+
+.Double.active:after {
+  background-position: -35px 5px;
+}
+
+.Jogging.active:after {
+  background-position: -108px 5px;
+}
+
+.Full-Featured.active:after {
+  background-position: -177px 5px;
+}
+
+.Umbrella.active:after {
+  background-position: -244px 5px;
+}
+
+.All-Terrain.active:after {
+  background-position: -311px 5px;
+}
+
+#drop-downs {
+  margin: 30px 0 0 0;
+  clear: left;
+}
+
+.drop-down {
+  display: none;
+}
+
+.open {
+  display: block;
+}
+
+.drop-down.open {
+  position: absolute;
+  z-index: 2;
+  right: 5px;
+  margin-top: 38px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e3;
+  width: 80%;
+  background-color: #fff;
+  padding: 15px 10px;
+}
+
+.drop-down.open.bottom {
+  margin-top: 60px;
+}
+
+.drop-down-title {
+  background: #f6f6f6 url(spritey-bits.png) no-repeat -83px -31px;
+  cursor: pointer;
+  width: 115px;
+  padding: 4px 5px;
+  font-weight: normal;
+  border: 1px solid #e4e4e3;
+  margin: 0;
+  border-bottom: 0;
+}
+
+.drop-down-title.bottom.open {
+  padding-bottom: 13px;
+}
+
+.drop-down-title.open {
+  background-position: -83px -65px;
+  border-bottom: 0;
+  padding-bottom: 19px;
+  position: relative;
+  z-index: 3;
+  border-radius: 8px 8px 0 0;
+  background-color: #fff;
+}
+
+.brandhead {
+  border-radius: 8px 0 0 0;
+}
+
+.featureshead {
+  border-radius: 0 0 0 8px;
+  border-bottom: 1px solid #e4e4e3;
+}
+
+.brand,
+.trait, 
+.weight {
+  float: left;
+  padding: 7px;
+  margin-right: 15px;
+}
+
+#trait-list,
+#weights-list {
+  width: 30%;
+  padding-right: 20px;
+  border-right: 1px dotted #d7d8d7;
+  margin-right: 20px;
+  float: left;
+}
+
+.close-button,
+.close-button-breadcrumb {
+  text-indent: -9999px;
+  width: 20px;
+  height: 14px;
+  background: url(spritey-bits.png) no-repeat right -144px;
+  float: right;
+  cursor: pointer;
+}
+
+.close-button-breadcrumb {
+  background: url(spritey-bits.png) no-repeat right -186px;
+}
+
+.listing {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.breadcrumb-item {
+  text-transform: capitalize;
+  margin-left: 15px;
+  float: left;
+}
+
+.breadcrumb-item.inactive {
+  display: none;
+}
+
+.breadcrumb-item.active {
+  display: inline;
+}
+
+.back-link {
+  padding: 0 15px;
+  background: url(spritey-bits.png) no-repeat 3px 4px;
+  display: inline-block;
+  float: left;
+  height: auto;
+  font-size: 1em;
+  border-right: 1px dotted #d6d6d4;
+}
+
+.back-link.text-hide {
+  text-indent: 0;
+}
+
+.slider {
+  float: left;
+  width: 60%;
+}
+
+.slider-holder {
+  position: relative;
+  width: 350px;
+  height: 10px;
+  float: left;
+  margin: 0 10px;
+}
+
+.note {
+  font-size: .8em;
+  float: left;
+  display: block;
+}
+
+.selected {
+  border: 2px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 8px 0 0 8px;
+  margin-top: -6px;
+  float: left;
+  font-size: 1.2em;
+}
+
+h1.top {
+  border-bottom: 1px dotted #ccc;
+  font-size: 1.5em;
+  color: #000;
+  margin-bottom: 10px;
+  padding-bottom: 7px;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
