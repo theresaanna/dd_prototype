@@ -137,7 +137,8 @@ a {
 
 #control-panel {
   background-image: -webkit-linear-gradient(left, #f5eedc, #fcf9f3, #f5eedc);
-  padding: 5px 15px;
+  padding: 5px 0;
+  width: 138px;
   float: left;
   margin-right: 20px;
   border-color: transparent;
@@ -151,7 +152,7 @@ a {
 }
 
 #controls {
-  float: left;
+  margin:5px 0 5px 21px;
 }
 
 #go-button {
@@ -160,6 +161,7 @@ a {
   color: #fff;
   padding: 3px 8px;
   font-weight: bold;
+  float: left;
 }
 
 .arrow {
@@ -173,6 +175,8 @@ a {
   display: block;
   float: left;
   height: 13px;
+  margin-top: 6px;
+  margin-left: 3px;
 }
 
 .text-hide {
@@ -182,45 +186,46 @@ a {
 /* stroller menu items */
 .category {
   float: left;
-  font-size: .8em;
-  background: #fff url(sprites-strollers.png) no-repeat;
-  padding: 35px 5px 5px 5px;
+  background: #fff url(module-sprites.png) no-repeat;
+  padding: 60px 5px 5px 5px;
   text-align: center;
   position: relative;
   z-index: 1;
-  margin: 0 5px 0 0;
-  width: 65px;
+  margin: 0 10px 0 0;
+  width: 75px;
   position: relative;
 }
 
 .category span {
   position: absolute;
-  top: 50px;
+  top: 69px;
+  width: 85px;
+  margin-left: -7px;
 }
 
 /* sprite positioning for stroller images */
 .Car.Seat {
-  background-position: 27px -77px;
+  background-position: 22px 10px;
 }
 
 .Double {
-  background-position: -35px -77px;
+  background-position: -75px 10px;
 }
 
 .Jogging {
-  background-position: -108px -77px;
+  background-position: -171px 10px;
 }
 
 .Full-Featured {
-  background-position: -177px -77px;
+  background-position: -269px 10px;
 }
 
 .Umbrella {
-  background-position: -244px -77px;
+  background-position: -368px 10px;
 }
 
 .All-Terrain {
-  background-position: -311px -77px;
+  background-position: -464px 10px;
 }
 
 .category.active:after {
@@ -232,43 +237,50 @@ a {
   top: 0;
   left: 0;
   content: "";
-  background: url(sprites-strollers.png) no-repeat;
+  background: url(module-sprites.png) no-repeat;
 }
 
-.category.active {
+.menu .category.active {
   background-position: 0 0;
   background-image: -webkit-linear-gradient(#accf55, #85a041);
-  font-weight: bold;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+.menu .category.rounded:hover {
+  text-decoration: underline;
+  font-weight: normal;
 }
 
 /* active images for stroller sprites */
 .Car.Seat.active:after {
-  background-position: 27px 5px;
+  background-position: 22px -76px;
 }
 
 .Double.active:after {
-  background-position: -35px 5px;
+  background-position: -75px -76px;
 }
 
 .Jogging.active:after {
-  background-position: -108px 5px;
+  background-position: -171px -76px;
 }
 
 .Full-Featured.active:after {
-  background-position: -177px 5px;
+  background-position: -269px -76px;
 }
 
 .Umbrella.active:after {
-  background-position: -244px 5px;
+  background-position: -368px -76px;
 }
 
 .All-Terrain.active:after {
-  background-position: -311px 5px;
+  background-position: -464px -76px;
 }
 
 #drop-downs {
-  margin: 30px 0 0 0;
+  margin: 50px 0 0 0;
   clear: left;
+  position: relative;
 }
 
 .drop-down {
@@ -281,14 +293,14 @@ a {
 
 .drop-down.open {
   position: absolute;
+  left: 139px;
   z-index: 2;
-  right: 5px;
-  margin-top: 38px;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   border: 1px solid #e4e4e3;
-  width: 80%;
   background-color: #fff;
-  padding: 15px 10px;
+  padding: 12px;
+  float: left;
+  width: 578px;
 }
 
 .drop-down.open.bottom {
@@ -296,27 +308,22 @@ a {
 }
 
 .drop-down-title {
-  background: #f6f6f6 url(spritey-bits.png) no-repeat -83px -31px;
+  background: #f6f6f6 url(module-sprites.png) no-repeat -682px -89px;
   cursor: pointer;
-  width: 115px;
+  width: 128px;
   padding: 4px 5px;
   font-weight: normal;
   border: 1px solid #e4e4e3;
   margin: 0;
   border-bottom: 0;
-}
-
-.drop-down-title.bottom.open {
-  padding-bottom: 13px;
+  padding: 15px 5px;
+  font-size: 1.3em;
+  float: left;
+  clear: left;
 }
 
 .drop-down-title.open {
-  background-position: -83px -65px;
-  border-bottom: 0;
-  padding-bottom: 19px;
-  position: relative;
-  z-index: 3;
-  border-radius: 8px 8px 0 0;
+  background-position: -682px -2px;
   background-color: #fff;
 }
 
