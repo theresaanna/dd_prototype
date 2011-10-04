@@ -112,7 +112,7 @@ a {
 
 .ui-slider-horizontal {
   position: absolute;
-  width: 350px;
+  width: 250px;
   height: 10px;
   background-image: -webkit-linear-gradient(#accf55, #85a041);
 }
@@ -276,7 +276,7 @@ a {
   margin-top: 38px;
   border-radius: 8px;
   border: 1px solid #e4e4e3;
-  width: 80%;
+  width: 50%;
   background-color: #fff;
   padding: 10px;
 }
@@ -320,11 +320,14 @@ a {
 
 #trait-list,
 #weights-list {
-  width: 30%;
-  padding-right: 20px;
-  border-right: 1px dotted #d7d8d7;
+  width: 40%;
   margin-right: 20px;
   float: left;
+}
+
+#weights-list {
+  border-left: 1px dotted #d7d8d7;
+  padding-left: 20px;
 }
 
 .close-button,
@@ -377,12 +380,12 @@ a {
 
 .slider {
   float: left;
-  width: 60%;
+  width: 75%;
 }
 
 .slider-holder {
   position: relative;
-  width: 350px;
+  width: 250px;
   height: 10px;
   float: left;
   margin: 0 10px;

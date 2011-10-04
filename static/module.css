@@ -464,7 +464,7 @@ h2 {
 
 .brand.active:after,
 .trait.active:after,
-.weight.active:after {
+.weight:active:after {
   background: url(module-sprites.png) no-repeat -787px -172px;
 }
 
