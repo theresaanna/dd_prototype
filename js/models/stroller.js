@@ -2,4 +2,4 @@
 
 var Stroller = Spine.Model.sub();
 
-Stroller.configure("Stroller", "name", "category", "brand", "price", "stars", "trait", "weight", "image");
+Stroller.configure("Stroller", "name", "category", "brand", "price", "stars", "trait", "weight", "image", "active");

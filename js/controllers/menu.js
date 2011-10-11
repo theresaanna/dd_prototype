@@ -227,14 +227,14 @@ var Menu = Spine.Controller.sub({
   // the primary logic that decides, when any criteria is clicked, what Stroller instances
   // will remain active and which will go into purgatory
   criteriaActivate: function() {
-    
+        
     // cache the criteria that is being evaluated on this call
     var criteria = $(event.target).data("type");
     
     // and the specific value selected
     if (criteria === 'price') {
       // the slider has two values - min and max
-      var values = $(event.target).data("values");
+      var value = $(event.target).data("values");
     }
     else {
       var value = $(event.target).data("value");
@@ -256,47 +256,20 @@ var Menu = Spine.Controller.sub({
       // going forward, we can rely on all records in Stroller being active
       // and do not have to do checks or suppress events
       Stroller.each(function(item) {
-        // switch how we determine active state based on applicable criteria in the 
-        // Stroller instance and what criteria has been activated. definitely a 
-        // to be refactored to be far more elegant
-        if (criteria === "brand") {
-          if (item.brand === value) {
-            var match = 'yes';
-          }
+        
+        //don't need to evaluate if another active criteria
+        //has rendered this active
+        if (item.active) {
+          item.active.push(value);
+          item.save();
+          return;
         }
-        else if (criteria === "category") {
-          var num = item.category.length
-          for (var i = 0; i < num; i++) {
-            if (item.category[i] === value) {
-              var match = 'yes';
-            }
-          }
-        }
-        else if (criteria === "star") {
-          if (parseInt(item.stars) >= parseInt(value)) {
-            var match = 'yes';
-          }
-        }
-        else if (criteria === "trait") {
-          var num = item.trait.length
-          for (var i = 0; i < num; i++) {
-            if (item.trait[i] === value) {
-              var match = 'yes';
-            }
-          }
-        }
-        else if (criteria === "weight") {
-          if ($.inArray(value, item.weight) !== -1) {
-            var match = 'yes';
-          }
-        }
-        else if (criteria === "price") {
-          if (item.price >= values[0] && item.price <= values[1]) {
-            var match = 'yes';
-          }
-        }
+        var match = determineActive(criteria, value, item);
 
         if (match) {
+          item.active = [];
+          item.active.push(value);
+          item.save();
           return;
         }
         else {
@@ -318,6 +291,34 @@ var Menu = Spine.Controller.sub({
           item.destroy();
         }
       });
+      
+      //evaluate PurgatoryItems and see if they now apply as active
+      PurgatoryItem.each(function(item) {
+        // i copied and pasted. that is not cool. i shall refactor.
+        var match = determineActive(criteria, value, item);
+        
+        // if it now matches, bring it back into stroller and
+        // kill its PI instance
+        if (match) {
+          Stroller.create({
+            name: item.name,
+            category: item.category,
+            brand: item.brand,
+            price: item.price,
+            stars: item.stars,
+            trait: item.trait,
+            weight: item.weight,
+            image: item.image,
+            active: [value]
+          });
+          item.destroy();
+        }
+        else {
+          return;
+        }
+      });
+      
+      
     }
   },
   
@@ -345,26 +346,83 @@ var Menu = Spine.Controller.sub({
       }
       // update breadcrumb menu
       MenuItem.trigger("breadcrumbdeactivate", value);
+      
+      // if a stroller item is active for only this criteria,
+      // deactivate it. otherwise, leave it active but update it
+      Stroller.each(function(item) {
+          // remove the active flag for this criteria
+          var len = item.active.length;
+          for (var i = 0; i <= len; i++) {
+            if(item.active[i] == value) {
+              console.log(item.active[i])
+              item.active.splice(i,1);
+            }
+          }
+          
+          if (item.active.length == 0) {
+            PurgatoryItem.create({
+              // keep a record of what criteria rendered this item
+              // inactive in the instance so that we can quickly recall it without fully reevaluating each
+              // item if the criteria is untoggled
+              removed: value,
 
-      // for each instance of PurgatoryItem that once again meets the active criteria,
-      // create a Stroller instance and remove its PurgatoryItem instance
-      PurgatoryItem.each(function(record) {
+              name: item.name,
+              category: item.category,
+              brand: item.brand,
+              price: item.price,
+              stars: item.stars,
+              trait: item.trait,
+              weight: item.weight,
+              image: item.image
+            });
+            item.destroy();
+          }
 
-        // when we are resetting the price or star, the value won't and shouldn't match
-        if (record.removed === value || $(event.target).data("type") === "price" || $(event.target).data("type") === "star") {
-          Stroller.create({
-            name: record.name,
-            category: record.category,
-            brand: record.brand,
-            price: record.price,
-            stars: record.stars,
-            trait: record.trait,
-            weight: record.weight,
-            image: record.image
-          });
-          record.destroy();
-        }
       });
     }
-  }
+  },
+  
 });  
+
+function determineActive(criteria, value, item) {
+  // switch how we determine active state based on applicable criteria in the 
+  // Stroller instance and what criteria has been activated. definitely a 
+  // to be refactored to be far more elegant
+  if (criteria === "brand") {
+    if (item.brand === value) {
+      var match = 'yes';
+    }
+  }
+  else if (criteria === "category") {
+    var num = item.category.length
+    for (var i = 0; i < num; i++) {
+      if (item.category[i] === value) {
+        var match = 'yes';
+      }
+    }
+  }
+  else if (criteria === "star") {
+    if (parseInt(item.stars) >= parseInt(value)) {
+      var match = 'yes';
+    }
+  }
+  else if (criteria === "trait") {
+    var num = item.trait.length
+    for (var i = 0; i < num; i++) {
+      if (item.trait[i] === value) {
+        var match = 'yes';
+      }
+    }
+  }
+  else if (criteria === "weight") {
+    if ($.inArray(value, item.weight) !== -1) {
+      var match = 'yes';
+    }
+  }
+  else if (criteria === "price") {
+    if (item.price >= value[0] && item.price <= value[1]) {
+      var match = 'yes';
+    }
+  }
+  return match;
+}
