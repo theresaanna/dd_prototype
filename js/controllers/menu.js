@@ -252,9 +252,10 @@ var Menu = Spine.Controller.sub({
       // for each category on each instance of Stroller, ultimately return
       // if the clicked category is present on the instance or remove it from
       // Stroller and put it into a new instance of PurgatoryItem.
-      // this is better than setting a flag on the Stroller instance because
-      // going forward, we can rely on all records in Stroller being active
-      // and do not have to do checks or suppress events
+
+      // this system of setting active flags to create an "or" listing is
+      // extremely inefficient. perhaps a worthwhile refactor might be to 
+      // associate stroller or PI items with menuitems?
       Stroller.each(function(item) {
         
         //don't need to evaluate if another active criteria
