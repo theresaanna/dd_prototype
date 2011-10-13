@@ -278,11 +278,11 @@ a {
   display: block;
 }
 
-.drop-down.open {
+.drop-down {
   position: absolute;
   z-index: 2;
   right: -10px;
-  margin-top: 38px;
+  top: 38px;
   border-radius: 8px;
   border: 1px solid #e4e4e3;
   width: 500px;
@@ -290,8 +290,8 @@ a {
   padding: 10px;
 }
 
-.drop-down.open.bottom {
-  margin-top: 60px;
+.drop-down.bottom {
+  top: 60px;
 }
 
 .drop-down-title {
