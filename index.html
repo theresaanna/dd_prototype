@@ -31,8 +31,8 @@
                             slide: function(event, ui) {
   			                            $(this).find(".ui-slider-handle").first().text("$" + ui.values[0]);
   			                            $(this).find(".ui-slider-handle").last().text("$" + ui.values[1]);
-  			                            $(this).data({type: "price", values: [ui.values[0], ui.values[1]]});
-  			                            $(this).parent().data({type: "price", values: [ui.values[0], ui.values[1]]});
+  			                            $(this).data({type: "price", value: [ui.values[0], ui.values[1]]});
+  			                            $(this).parent().data({type: "price", value: [ui.values[0], ui.values[1]]});
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
   			                    }

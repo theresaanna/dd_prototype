@@ -232,13 +232,7 @@ var Menu = Spine.Controller.sub({
     var criteria = $(event.target).data("type");
     
     // and the specific value selected
-    if (criteria === 'price') {
-      // the slider has two values - min and max
-      var value = $(event.target).data("values");
-    }
-    else {
-      var value = $(event.target).data("value");
-    }
+    var value = $(event.target).data("value");
 
     // only execute if we've clicked on a valid criteria input
     if (criteria) {
@@ -257,7 +251,6 @@ var Menu = Spine.Controller.sub({
       // extremely inefficient. perhaps a worthwhile refactor might be to 
       // associate stroller or PI items with menuitems?
       Stroller.each(function(item) {
-        
         //don't need to evaluate if another active criteria
         //has rendered this active
         if (item.active) {
@@ -292,7 +285,7 @@ var Menu = Spine.Controller.sub({
           item.destroy();
         }
       });
-      
+
       //evaluate PurgatoryItems and see if they now apply as active
       PurgatoryItem.each(function(item) {
         // i copied and pasted. that is not cool. i shall refactor.
@@ -326,6 +319,7 @@ var Menu = Spine.Controller.sub({
   criteriaDeactivate: function() {
     //only execute if we've clicked on a valid criteria input
     if ($(event.target).data("type") || $(event.target).hasClass('close-button-breadcrumb')) {
+      var criteria = $(event.target).data("type");
       
       // if a matched breadcrumb link close button was clicked
       if ($(event.target).hasClass('close-button-breadcrumb')) {
@@ -345,6 +339,7 @@ var Menu = Spine.Controller.sub({
         // toggle classes on the clicked element so that the appropriate event gets called
         $(event.target).addClass("inactive").removeClass("active");
       }
+
       // update breadcrumb menu
       MenuItem.trigger("breadcrumbdeactivate", value);
       
@@ -352,31 +347,43 @@ var Menu = Spine.Controller.sub({
       // deactivate it. otherwise, leave it active but update it
       Stroller.each(function(item) {
           // remove the active flag for this criteria
-          var len = item.active.length;
-          for (var i = 0; i <= len; i++) {
-            if(item.active[i] == value) {
-              console.log(item.active[i])
-              item.active.splice(i,1);
+          
+          // if the item is active under other criteria,
+          // find the one just deactivated and remove it from
+          // the list
+          if (typeof item.active != 'undefined') {
+            var len = item.active.length;
+            for (var i = 0; i <= len; i++) {
+              if (item.active[i] == value) {
+                item.active.splice(i,1);
+              }
             }
           }
+          else {
+            var len = 0;
+          }
           
-          if (item.active.length == 0) {
-            PurgatoryItem.create({
-              // keep a record of what criteria rendered this item
-              // inactive in the instance so that we can quickly recall it without fully reevaluating each
-              // item if the criteria is untoggled
-              removed: value,
+          // if this item has no other active criteria, kill it
+          if (len === 0) {
+            if (determineActive(criteria, value, item) !== 'match') {
+              console.log('yeah')
+              PurgatoryItem.create({
+                // keep a record of what criteria rendered this item
+                // inactive in the instance so that we can quickly recall it without fully reevaluating each
+                // item if the criteria is untoggled
+                removed: value,
 
-              name: item.name,
-              category: item.category,
-              brand: item.brand,
-              price: item.price,
-              stars: item.stars,
-              trait: item.trait,
-              weight: item.weight,
-              image: item.image
-            });
-            item.destroy();
+                name: item.name,
+                category: item.category,
+                brand: item.brand,
+                price: item.price,
+                stars: item.stars,
+                trait: item.trait,
+                weight: item.weight,
+                image: item.image
+              });
+              item.destroy();
+            }
           }
 
       });
