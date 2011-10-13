@@ -253,15 +253,17 @@ var Menu = Spine.Controller.sub({
       Stroller.each(function(item) {
         //don't need to evaluate if another active criteria
         //has rendered this active
-        if (item.active) {
+        if (typeof item.active !== 'undefined' && item.active.length > 0) {
           item.active.push(value);
           item.save();
           return;
         }
+        else {
+          item.active = [];
+        }
         var match = determineActive(criteria, value, item);
 
         if (match) {
-          item.active = [];
           item.active.push(value);
           item.save();
           return;
@@ -346,46 +348,45 @@ var Menu = Spine.Controller.sub({
       // if a stroller item is active for only this criteria,
       // deactivate it. otherwise, leave it active but update it
       Stroller.each(function(item) {
-          // remove the active flag for this criteria
-          
-          // if the item is active under other criteria,
-          // find the one just deactivated and remove it from
-          // the list
-          if (typeof item.active != 'undefined') {
-            var len = item.active.length;
-            for (var i = 0; i <= len; i++) {
-              if (item.active[i] == value) {
-                item.active.splice(i,1);
-              }
+        // if the item is active under other criteria,
+        // find the one just deactivated and remove it from
+        // the list
+        if (typeof item.active !== 'undefined' && item.active.length > 0) {
+          var len = item.active.length;
+          for (var i = 0; i <= len; i++) {
+            if (item.active[i] === value) {
+              item.active.splice(i,1);
             }
-          }
-          else {
-            var len = 0;
-          }
-          
-          // if this item has no other active criteria, kill it
-          if (len === 0) {
-            if (determineActive(criteria, value, item) !== 'match') {
-              console.log('yeah')
-              PurgatoryItem.create({
-                // keep a record of what criteria rendered this item
-                // inactive in the instance so that we can quickly recall it without fully reevaluating each
-                // item if the criteria is untoggled
-                removed: value,
+          } 
+          //update length to see if we should kill this item
+          var len = item.active.length;
+        }
+        // if there were no active items, well, you get it...
+        else {
+          var len = 0;
+        }
+        
+        // if this item has no other active criteria, kill it
+        if (len === 0) {
+          if (determineActive(criteria, value, item) !== 'match') {
+            PurgatoryItem.create({
+              // keep a record of what criteria rendered this item
+              // inactive in the instance so that we can quickly recall it without fully reevaluating each
+              // item if the criteria is untoggled
+              removed: value,
 
-                name: item.name,
-                category: item.category,
-                brand: item.brand,
-                price: item.price,
-                stars: item.stars,
-                trait: item.trait,
-                weight: item.weight,
-                image: item.image
-              });
-              item.destroy();
-            }
+              name: item.name,
+              category: item.category,
+              brand: item.brand,
+              price: item.price,
+              stars: item.stars,
+              trait: item.trait,
+              weight: item.weight,
+              image: item.image
+            });
+            item.destroy();
           }
-
+        }
       });
     }
   },
@@ -410,6 +411,7 @@ function determineActive(criteria, value, item) {
     }
   }
   else if (criteria === "star") {
+    var value = $("#slider-star").data('rating');
     if (parseInt(item.stars) >= parseInt(value)) {
       var match = 'yes';
     }

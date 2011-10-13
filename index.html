@@ -47,8 +47,11 @@
                             value: 1,
                             slide: function(event, ui) {
   			                            $(this).find(".ui-slider-handle").text(ui.value);
-  			                            $(this).data({type: "star", value: ui.value});
-  			                            $(this).parent().data({type: "star", value: ui.value});
+  			                            // because its easier to pass "star" as the val to match against
+  			                            // to activate/deactivate and seek out rating, which is unique
+  			                            // just for stars
+  			                            $(this).data({type: "star", value: "star", rating: ui.value});
+  			                            $(this).parent().data({type: "star", value: "star", rating: ui.value});
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
   			                            if (ui.value === 5) {
