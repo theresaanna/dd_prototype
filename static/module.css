@@ -389,17 +389,24 @@ a {
   text-indent: 0;
 }
 
-.slider {
+.middle {
+  display: block;
   float: left;
-  width: 80%;
+  margin-right: 5px;
 }
 
-.slider-holder {
-  position: relative;
-  width: 350px;
-  height: 10px;
+.selected.low {
+  margin-right: 5px;
+}
+
+.slider {
   float: left;
-  margin: 0 10px;
+  width: 75%;
+  min-height: 30px;
+}
+
+.slider.price {
+  width: 65%;
 }
 
 .note {

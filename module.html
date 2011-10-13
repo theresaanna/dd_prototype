@@ -31,10 +31,12 @@
                             slide: function(event, ui) {
   			                            $(this).find(".ui-slider-handle").first().text("$" + ui.values[0]);
   			                            $(this).find(".ui-slider-handle").last().text("$" + ui.values[1]);
-  			                            $(this).data({type: "price", values: [ui.values[0], ui.values[1]]});
-  			                            $(this).parent().data({type: "price", values: [ui.values[0], ui.values[1]]});
+  			                            $(this).data({type: "price", value: [ui.values[0], ui.values[1]]});
+  			                            $(this).parent().data({type: "price", value: [ui.values[0], ui.values[1]]});
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
+                                    $(".price.selected.low").html('$' + ui.values[0]);
+                                    $(".price.selected.high").html('$' + ui.values[1]);
   			                    }
   		});
   		$("#slider-price .ui-slider-handle").first().text("$0");
@@ -47,15 +49,18 @@
                             value: 1,
                             slide: function(event, ui) {
   			                            $(this).find(".ui-slider-handle").text(ui.value);
-  			                            $(this).data({type: "star", value: ui.value});
-  			                            $(this).parent().data({type: "star", value: ui.value});
+  			                            // because its easier to pass "star" as the val to match against
+  			                            // to activate/deactivate and seek out rating, which is unique
+  			                            // just for stars
+  			                            $(this).data({type: "star", value: "star", rating: ui.value});
+  			                            $(this).parent().data({type: "star", value: "star", rating: ui.value});
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
   			                            if (ui.value === 5) {
-  			                              $(".selected").text(ui.value + " stars");
+  			                              $(".star.selected").text(ui.value + " stars");
   			                            }
   			                            else {
-  			                              $(".selected").text(ui.value + "-star and up");
+  			                              $(".star.selected").text(ui.value + "-star and up");
   			                            }
   			                    }
   		});
@@ -120,15 +125,27 @@
                   </script>
                 </div>
 
-                <h1 class="drop-down-title serif">Price</h1>
+                <h1 class="drop-down-title right serif">Price</h1>
                 <div class="menu drop-down clearfix">
+                  <div class="close-button">close</div>
                   <div class="container">
-                    <div id="slider-price" class="clearfix"></div>
+                    <div class="slider price">
+                      <div id="slider-price" class="clearfix"></div>
+                    </div>
+                    <div class="price selected low">
+                      $0
+                    </div>
+                    <span class="middle">to</span>
+                    <div class="price selected high">
+                      $1000
+                    </div>
                   </div>
                 </div>
 
+
                 <h1 class="drop-down-title serif">Ratings</h1>
-                <div id="star-list" class="menu drop-down clearfix">
+                <div id="star-list" class="menu drop-down bottom clearfix">
+                  <div class="close-button">close</div>
                   <div class="container">
                     <div class="slider">
                       <span class="note">lowest<br/>rated</span>
@@ -137,7 +154,7 @@
                       </div>
                       <span class="note">highest<br/>rated</span>
                     </div>
-                    <div class="selected">
+                    <div class="star selected">
                       1-star and up
                     </div>
                   </div>
