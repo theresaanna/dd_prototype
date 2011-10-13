@@ -382,6 +382,7 @@ a {
   height: auto;
   font-size: 1em;
   border-right: 1px dotted #d6d6d4;
+  margin-top: 0;
 }
 
 .back-link.text-hide {

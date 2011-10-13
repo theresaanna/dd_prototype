@@ -150,9 +150,11 @@ var Menu = Spine.Controller.sub({
     var currentLength = Stroller.all().length + PurgatoryItem.all().length;
     if (Stroller.all().length === currentLength) {
       $("#counter").html("All");
+      $(".clear-link").hide();
     }
     else {
       $("#counter").html(Stroller.all().length);
+      $(".clear-link").show();
     }
     
     // toggle visibility of the clear link

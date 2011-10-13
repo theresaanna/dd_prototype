@@ -1,7 +1,7 @@
 // when we initialize the controller, we pass in a DOM element for it to bind to
 jQuery(function($) {
   return new Menu({
-    el: $("#menu")
+    el: $("#mod")
   });
 });
 
@@ -132,7 +132,6 @@ var Menu = Spine.Controller.sub({
       if (type === "brand") {
         var count = MenuItem.findAllByAttribute(ind.criteria).length;
         ele.append($(markup).data({type: ind.criteria, value: ind.value, count: count}));
-        $(markup).children().data({type: ind.criteria, value: ind.value, count: count})
       }
       else {
        ele.append($(markup).data({type: ind.criteria, value: ind.value})); 
@@ -151,9 +150,11 @@ var Menu = Spine.Controller.sub({
     var currentLength = Stroller.all().length + PurgatoryItem.all().length;
     if (Stroller.all().length === currentLength) {
       $("#counter").html("All");
+      $(".clear-link").hide();
     }
     else {
       $("#counter").html(Stroller.all().length);
+      $(".clear-link").show();
     }
     
     // toggle visibility of the clear link
@@ -207,57 +208,162 @@ var Menu = Spine.Controller.sub({
     })
   },
   
-  
-    // the primary logic that decides, when any criteria is clicked, what Stroller instances
-    // will remain active and which will go into purgatory
-    criteriaActivate: function() {
-
-      // cache the criteria that is being evaluated on this call
-      var criteria = $(event.target).data("type");
-
-      // and the specific value selected
-      if (criteria === 'price') {
-        // the slider has two values - min and max
-        var value = $(event.target).data("values");
+  // hide breadcrumb items when the criteria
+  // is deactivated
+  breadcrumbDeactivate: function(data) {
+    $(".breadcrumb-item").each(function(i, b) {
+      if ($(b).data("value") === data) {
+        $(this).removeClass('active').addClass('inactive');
       }
+    });
+    
+  },
+  
+  // the primary logic that decides, when any criteria is clicked, what Stroller instances
+  // will remain active and which will go into purgatory
+  criteriaActivate: function() {
+        
+    // cache the criteria that is being evaluated on this call
+    var criteria = $(event.target).data("type");
+    
+    // and the specific value selected
+    var value = $(event.target).data("value");
+
+    // only execute if we've clicked on a valid criteria input
+    if (criteria) {
+      // toggle classes on the clicked element so that the appropriate event gets called
+      $(event.target).addClass("active").removeClass("inactive");
+      
+      // also mirror this on the corresponding breadcrumb menu item
+      MenuItem.trigger("breadcrumbactivate", {criteria: criteria, value: value});
+      
+                    
+      // for each category on each instance of Stroller, ultimately return
+      // if the clicked category is present on the instance or remove it from
+      // Stroller and put it into a new instance of PurgatoryItem.
+
+      // this system of setting active flags to create an "or" listing is
+      // extremely inefficient. perhaps a worthwhile refactor might be to 
+      // associate stroller or PI items with menuitems?
+      Stroller.each(function(item) {
+        //don't need to evaluate if another active criteria
+        //has rendered this active
+        if (typeof item.active !== 'undefined' && item.active.length > 0) {
+          item.active.push(value);
+          item.save();
+          return;
+        }
+        else {
+          item.active = [];
+        }
+        var match = determineActive(criteria, value, item);
+
+        if (match) {
+          item.active.push(value);
+          item.save();
+          return;
+        }
+        else {
+          PurgatoryItem.create({
+            // keep a record of what criteria rendered this item
+            // inactive in the instance so that we can quickly recall it without fully reevaluating each
+            // item if the criteria is untoggled
+            removed: value,
+          
+            name: item.name,
+            category: item.category,
+            brand: item.brand,
+            price: item.price,
+            stars: item.stars,
+            trait: item.trait,
+            weight: item.weight,
+            image: item.image
+          });
+          item.destroy();
+        }
+      });
+
+      //evaluate PurgatoryItems and see if they now apply as active
+      PurgatoryItem.each(function(item) {
+        // i copied and pasted. that is not cool. i shall refactor.
+        var match = determineActive(criteria, value, item);
+        
+        // if it now matches, bring it back into stroller and
+        // kill its PI instance
+        if (match) {
+          Stroller.create({
+            name: item.name,
+            category: item.category,
+            brand: item.brand,
+            price: item.price,
+            stars: item.stars,
+            trait: item.trait,
+            weight: item.weight,
+            image: item.image,
+            active: [value]
+          });
+          item.destroy();
+        }
+        else {
+          return;
+        }
+      });
+      
+      
+    }
+  },
+  
+  criteriaDeactivate: function() {
+    //only execute if we've clicked on a valid criteria input
+    if ($(event.target).data("type") || $(event.target).hasClass('close-button-breadcrumb')) {
+      var criteria = $(event.target).data("type");
+      
+      // if a matched breadcrumb link close button was clicked
+      if ($(event.target).hasClass('close-button-breadcrumb')) {
+        var value = $(event.target).parent().data("value");
+        
+        //deactivate matching main menu item
+        $(".active").each(function(i, m) {
+          if ($(this).data("value") === value) {
+            $(this).addClass("inactive").removeClass("active");
+          }
+        });
+      }
+      
+      // if we've clicked on a main menu item
       else {
         var value = $(event.target).data("value");
+        // toggle classes on the clicked element so that the appropriate event gets called
+        $(event.target).addClass("inactive").removeClass("active");
       }
 
-      // only execute if we've clicked on a valid criteria input
-      if (criteria) {
-        // toggle classes on the clicked element so that the appropriate event gets called
-        $(event.target).addClass("active").removeClass("inactive");
-
-        // also mirror this on the corresponding breadcrumb menu item
-        MenuItem.trigger("breadcrumbactivate", {criteria: criteria, value: value});
-
-
-        // for each category on each instance of Stroller, ultimately return
-        // if the clicked category is present on the instance or remove it from
-        // Stroller and put it into a new instance of PurgatoryItem.
-
-        // this system of setting active flags to create an "or" listing is
-        // extremely inefficient. perhaps a worthwhile refactor might be to 
-        // associate stroller or PI items with menuitems?
-        Stroller.each(function(item) {
-
-          //don't need to evaluate if another active criteria
-          //has rendered this active
-          if (item.active) {
-            item.active.push(value);
-            item.save();
-            return;
-          }
-          var match = determineActive(criteria, value, item);
-
-          if (match) {
-            item.active = [];
-            item.active.push(value);
-            item.save();
-            return;
-          }
-          else {
+      // update breadcrumb menu
+      MenuItem.trigger("breadcrumbdeactivate", value);
+      
+      // if a stroller item is active for only this criteria,
+      // deactivate it. otherwise, leave it active but update it
+      Stroller.each(function(item) {
+        // if the item is active under other criteria,
+        // find the one just deactivated and remove it from
+        // the list
+        if (typeof item.active !== 'undefined' && item.active.length > 0) {
+          var len = item.active.length;
+          for (var i = 0; i <= len - 1; i++) {
+            if (item.active[i] === value) {
+              item.active.splice(i,1);
+            }
+          } 
+          //update length to see if we should kill this item
+          var len = item.active.length;
+        }
+        // if there were no active items, well, you get it...
+        else {
+          var len = 0;
+        }
+        
+        // if this item has no other active criteria, kill it
+        if (len === 0) {
+          if (determineActive(criteria, value, item) !== 'match') {
             PurgatoryItem.create({
               // keep a record of what criteria rendered this item
               // inactive in the instance so that we can quickly recall it without fully reevaluating each
@@ -275,137 +381,53 @@ var Menu = Spine.Controller.sub({
             });
             item.destroy();
           }
-        });
-
-        //evaluate PurgatoryItems and see if they now apply as active
-        PurgatoryItem.each(function(item) {
-          // i copied and pasted. that is not cool. i shall refactor.
-          var match = determineActive(criteria, value, item);
-
-          // if it now matches, bring it back into stroller and
-          // kill its PI instance
-          if (match) {
-            Stroller.create({
-              name: item.name,
-              category: item.category,
-              brand: item.brand,
-              price: item.price,
-              stars: item.stars,
-              trait: item.trait,
-              weight: item.weight,
-              image: item.image,
-              active: [value]
-            });
-            item.destroy();
-          }
-          else {
-            return;
-          }
-        });
-
-
-      }
-    },
-
-    criteriaDeactivate: function() {
-      //only execute if we've clicked on a valid criteria input
-      if ($(event.target).data("type") || $(event.target).hasClass('close-button-breadcrumb')) {
-
-        // if a matched breadcrumb link close button was clicked
-        if ($(event.target).hasClass('close-button-breadcrumb')) {
-          var value = $(event.target).parent().data("value");
-
-          //deactivate matching main menu item
-          $(".active").each(function(i, m) {
-            if ($(this).data("value") === value) {
-              $(this).addClass("inactive").removeClass("active");
-            }
-          });
         }
-
-        // if we've clicked on a main menu item
-        else {
-          var value = $(event.target).data("value");
-          // toggle classes on the clicked element so that the appropriate event gets called
-          $(event.target).addClass("inactive").removeClass("active");
-        }
-
-        // if a stroller item is active for only this criteria,
-        // deactivate it. otherwise, leave it active but update it
-        Stroller.each(function(item) {
-            // remove the active flag for this criteria
-            var len = item.active.length;
-            for (var i = 0; i <= len; i++) {
-              if(item.active[i] == value) {
-                console.log(item.active[i])
-                item.active.splice(i,1);
-              }
-            }
-
-            if (item.active.length == 0) {
-              PurgatoryItem.create({
-                // keep a record of what criteria rendered this item
-                // inactive in the instance so that we can quickly recall it without fully reevaluating each
-                // item if the criteria is untoggled
-                removed: value,
-
-                name: item.name,
-                category: item.category,
-                brand: item.brand,
-                price: item.price,
-                stars: item.stars,
-                trait: item.trait,
-                weight: item.weight,
-                image: item.image
-              });
-              item.destroy();
-            }
-
-        });
-      }
-    },
-
-  });  
-
-  function determineActive(criteria, value, item) {
-    // switch how we determine active state based on applicable criteria in the 
-    // Stroller instance and what criteria has been activated. definitely a 
-    // to be refactored to be far more elegant
-    if (criteria === "brand") {
-      if (item.brand === value) {
-        var match = 'yes';
-      }
+      });
     }
-    else if (criteria === "category") {
-      var num = item.category.length
-      for (var i = 0; i < num; i++) {
-        if (item.category[i] === value) {
-          var match = 'yes';
-        }
-      }
+  },
+  
+});  
+
+function determineActive(criteria, value, item) {
+  // switch how we determine active state based on applicable criteria in the 
+  // Stroller instance and what criteria has been activated. definitely a 
+  // to be refactored to be far more elegant
+  if (criteria === "brand") {
+    if (item.brand === value) {
+      var match = 'yes';
     }
-    else if (criteria === "star") {
-      if (parseInt(item.stars) >= parseInt(value)) {
-        var match = 'yes';
-      }
-    }
-    else if (criteria === "trait") {
-      var num = item.trait.length
-      for (var i = 0; i < num; i++) {
-        if (item.trait[i] === value) {
-          var match = 'yes';
-        }
-      }
-    }
-    else if (criteria === "weight") {
-      if ($.inArray(value, item.weight) !== -1) {
-        var match = 'yes';
-      }
-    }
-    else if (criteria === "price") {
-      if (item.price >= value[0] && item.price <= value[1]) {
-        var match = 'yes';
-      }
-    }
-    return match;
   }
+  else if (criteria === "category") {
+    var num = item.category.length
+    for (var i = 0; i < num; i++) {
+      if (item.category[i] === value) {
+        var match = 'yes';
+      }
+    }
+  }
+  else if (criteria === "star") {
+    var value = $("#slider-star").data('rating');
+    if (parseInt(item.stars) >= parseInt(value)) {
+      var match = 'yes';
+    }
+  }
+  else if (criteria === "trait") {
+    var num = item.trait.length
+    for (var i = 0; i < num; i++) {
+      if (item.trait[i] === value) {
+        var match = 'yes';
+      }
+    }
+  }
+  else if (criteria === "weight") {
+    if ($.inArray(value, item.weight) !== -1) {
+      var match = 'yes';
+    }
+  }
+  else if (criteria === "price") {
+    if (item.price >= value[0] && item.price <= value[1]) {
+      var match = 'yes';
+    }
+  }
+  return match;
+}
