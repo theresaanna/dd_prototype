@@ -35,6 +35,8 @@
   			                            $(this).parent().data({type: "price", value: [ui.values[0], ui.values[1]]});
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
+                                    $(".price.selected.low").html('$' + ui.values[0]);
+                                    $(".price.selected.high").html('$' + ui.values[1]);
   			                    }
   		});
   		$("#slider-price .ui-slider-handle").first().text("$0");
@@ -55,10 +57,10 @@
   			                            MenuItem.trigger("sliderremove");
   			                            MenuItem.trigger("sliderchange");
   			                            if (ui.value === 5) {
-  			                              $(".selected").text(ui.value + " stars");
+  			                              $(".star.selected").text(ui.value + " stars");
   			                            }
   			                            else {
-  			                              $(".selected").text(ui.value + "-star and up");
+  			                              $(".star.selected").text(ui.value + "-star and up");
   			                            }
   			                    }
   		});
@@ -122,7 +124,16 @@
             <div class="menu drop-down clearfix">
               <div class="close-button">close</div>
               <div class="container">
-                <div id="slider-price" class="clearfix"></div>
+                <div class="slider price">
+                  <div id="slider-price" class="clearfix"></div>
+                </div>
+                <div class="price selected low">
+                  $0
+                </div>
+                <span class="middle">to</span>
+                <div class="price selected high">
+                  $1000
+                </div>
               </div>
             </div>
 
@@ -137,7 +148,7 @@
                   </div>
                   <span class="note">highest<br/>rated</span>
                 </div>
-                <div class="selected">
+                <div class="star selected">
                   1-star and up
                 </div>
               </div>

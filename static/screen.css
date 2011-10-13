@@ -401,9 +401,24 @@ a {
   text-indent: 0;
 }
 
+.middle {
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+
+.selected.low {
+  margin-right: 5px;
+}
+
 .slider {
   float: left;
   width: 75%;
+  min-height: 30px;
+}
+
+.slider.price {
+  width: 65%;
 }
 
 .slider-holder {
