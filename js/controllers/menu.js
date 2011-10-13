@@ -353,7 +353,7 @@ var Menu = Spine.Controller.sub({
         // the list
         if (typeof item.active !== 'undefined' && item.active.length > 0) {
           var len = item.active.length;
-          for (var i = 0; i <= len; i++) {
+          for (var i = 0; i <= len - 1; i++) {
             if (item.active[i] === value) {
               item.active.splice(i,1);
             }
