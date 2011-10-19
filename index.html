@@ -53,8 +53,7 @@
   			                            // just for stars
   			                            $(this).data({type: "star", value: "star", rating: ui.value});
   			                            $(this).parent().data({type: "star", value: "star", rating: ui.value});
-  			                            MenuItem.trigger("sliderremove");
-  			                            MenuItem.trigger("sliderchange");
+  			                            MenuItem.trigger("sliderchange", {type: "star", value: "star", rating: ui.value});
   			                            if (ui.value === 5) {
   			                              $(".star.selected").text(ui.value + " stars");
   			                            }
