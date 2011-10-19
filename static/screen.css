@@ -40,6 +40,10 @@ a {
   color: #fff;
 }
 
+.slider.active {
+  background: none;
+}
+
 .serif {
   font-family: Georgia, serif;
 }
