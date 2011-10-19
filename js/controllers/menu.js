@@ -36,7 +36,6 @@ var Menu = Spine.Controller.sub({
     // to instances of our three types of models
     Stroller.bind("setup", this.proxy(this.setup));
     MenuItem.bind("sliderchange", this.criteriaActivate);
-    MenuItem.bind("sliderremove", this.criteriaDeactivate);
     Stroller.bind("refresh change", this.counter);
     PurgatoryItem.bind("refresh change", this.counter);
     MenuItem.bind("cleartoggle", this.clearToggle);
@@ -228,18 +227,30 @@ var Menu = Spine.Controller.sub({
   
   // the primary logic that decides, when any criteria is clicked, what Stroller instances
   // will remain active and which will go into purgatory
-  criteriaActivate: function() {
-        
-    // cache the criteria that is being evaluated on this call
-    var criteria = $(event.target).data("type");
+  criteriaActivate: function(slider) {
     
-    // and the specific value selected
-    var value = $(event.target).data("value");
+    // with the sliders, event.target is unreliable so data is
+    // passed in via the slider update trigger
+    if (slider.value) {
+      var criteria = slider.type;
+      var value = slider.value;
+      var sliderOn = 'yes';
+    } else {
+      // cache the criteria that is being evaluated on this call
+      var criteria = $(event.target).data("type");
+
+      // and the specific value selected
+      var value = $(event.target).data("value");
+      
+      var sliderOn;
+    }
 
     // only execute if we've clicked on a valid criteria input
     if (criteria) {
-      // toggle classes on the clicked element so that the appropriate event gets called
-      $(event.target).addClass("active").removeClass("inactive");
+      if (sliderOn != 'yes') {
+        // toggle classes on the clicked element so that the appropriate event gets called
+        $(event.target).addClass("active").removeClass("inactive");
+      }
       
       // also mirror this on the corresponding breadcrumb menu item
       MenuItem.trigger("breadcrumbactivate", {criteria: criteria, value: value});
@@ -249,13 +260,13 @@ var Menu = Spine.Controller.sub({
       // if the clicked category is present on the instance or remove it from
       // Stroller and put it into a new instance of PurgatoryItem.
 
-      // this system of setting active flags to create an "or" listing is
+      // this system of setting active flags to create an "and" listing is
       // extremely inefficient. perhaps a worthwhile refactor might be to 
       // associate stroller or PI items with menuitems?
       Stroller.each(function(item) {
         //don't need to evaluate if another active criteria
         //has rendered this active
-        if (typeof item.active !== 'undefined' && item.active.length > 0) {
+        if (typeof item.active !== 'undefined' && item.active.length > 0 && sliderOn != 'yes') {
           item.active.push(value);
           item.save();
           return;
