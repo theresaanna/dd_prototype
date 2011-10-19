@@ -12,7 +12,6 @@ var Menu = Spine.Controller.sub({
     "click .active": "criteriaDeactivate",
     "click .inactive": "criteriaActivate",
     "click #go-button": "results",
-    "click .clear-link": "resetAll",
     "click .close-button-breadcrumb": "criteriaDeactivate"
   },
   
