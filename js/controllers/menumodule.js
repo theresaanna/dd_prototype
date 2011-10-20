@@ -12,6 +12,7 @@ var Menu = Spine.Controller.sub({
     "click .active": "criteriaDeactivate",
     "click .inactive": "criteriaActivate",
     "click #go-button": "results",
+    "click .clear-link": "resetAll",
     "click .close-button-breadcrumb": "criteriaDeactivate"
   },
   
@@ -35,7 +36,6 @@ var Menu = Spine.Controller.sub({
     // to instances of our three types of models
     Stroller.bind("setup", this.proxy(this.setup));
     MenuItem.bind("sliderchange", this.criteriaActivate);
-    MenuItem.bind("sliderremove", this.criteriaDeactivate);
     Stroller.bind("refresh change", this.counter);
     PurgatoryItem.bind("refresh change", this.counter);
     MenuItem.bind("cleartoggle", this.clearToggle);
